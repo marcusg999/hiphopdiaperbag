@@ -34,6 +34,25 @@ from PIL import Image
 from scipy import ndimage
 
 LEAK_SEAL = 3         # backdrop erosion that seals fill-leak channels
+SEE_THROUGH_FRAC = 9.99   # DISABLED, see note below. Was 0.011.
+                      # The strap gap and the graffiti tags are BOTH enclosed
+                      # islands of near-backdrop colour, and neither area nor
+                      # brightness separates them: measured, the white ink sits
+                      # at luminance 209 against a 214 backdrop, and the front
+                      # panel's largest tag blobs (6.2% of frame) are bigger
+                      # than the side strap gap (1.5%). Thresholding either way
+                      # punches a hole straight through the print. Fixing this
+                      # properly means re-rendering the turntable against a
+                      # colour the print does not contain, not post-processing.
+                      # OLD:  # an enclosed backdrop-coloured region larger than this
+                      # share of the frame is a gap you are meant to see the page
+                      # through, not a graffiti tag. Empirical: across the turn the
+                      # tags top out near 1.0% and the real gaps between the straps
+                      # and the body start at 1.28%. Brightness cannot make this
+                      # call — the white ink measures luminance 209 against a 214
+                      # backdrop, so any luma key punches holes through the print.
+HOLE_AREA_FRAC = 0.0025  # above this share of the frame, a bridged region is
+                      # real see-through negative space, not a notch to fill
 CLOSE_ITERS = 10      # bridge radius for the matte
 ERODE_ITERS = 6       # pull the matte back inside the true edge
                       # Both tuned by eye on frames 0/66/113. The erosion is the
@@ -91,6 +110,20 @@ def silhouette(rgb, opening=0):
     edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
     edge = edge[edge != 0]
     bg = np.isin(lab, edge)
+
+    # Backdrop that is enclosed by the product is normally kept — that is what
+    # protects the white tags, which are islands of near-backdrop colour ringed
+    # by black canvas. But the gap between a shoulder strap and the body is also
+    # enclosed in 2D, and that one really is a hole. Size tells them apart.
+    enclosed = near & ~bg
+    elab, en = ndimage.label(enclosed)
+    if en:
+        eareas = ndimage.sum(enclosed, elab, range(1, en + 1))
+        elimit = SEE_THROUGH_FRAC * h * w
+        for i, a in enumerate(eareas, start=1):
+            if a > elimit:
+                bg |= (elab == i)
+
     subj = ~bg
 
     # Sever thin attachments before picking the main blob. The render paints a
@@ -112,11 +145,29 @@ def silhouette(rgb, opening=0):
         # A wide closing, then fill. The white graffiti tags that run right to
         # the silhouette edge are the same value as the backdrop and touch it,
         # so the fill bites notches into the outline and the product reads as a
-        # bad cutout. Bridging at this radius removes the comb while leaving the
-        # real concavities — the gap under the handle, the strap gaps — intact.
+        # bad cutout. Bridging at this radius removes the comb.
+        before = subj.copy()
         subj = ndimage.binary_fill_holes(subj)
         subj = ndimage.binary_closing(subj, np.ones((3, 3)), iterations=CLOSE_ITERS)
         subj = ndimage.binary_fill_holes(subj)
+
+        # Give back the real negative space. That closing cannot tell the
+        # difference between a notch a few pixels wide chewed out of the
+        # outline, and the genuine gap you see through between the shoulder
+        # straps and the body of the bag — it bridges both, and the fill then
+        # makes them solid white. So look at everything the morphology just
+        # claimed from the backdrop and keep only the small claims: a notch is
+        # tiny, a see-through gap is not. Anything larger than the threshold is
+        # a hole you are meant to see the page through.
+        claimed = subj & ~before
+        clab, cn = ndimage.label(claimed)
+        if cn:
+            areas = ndimage.sum(claimed, clab, range(1, cn + 1))
+            limit = HOLE_AREA_FRAC * rgb.shape[0] * rgb.shape[1]
+            for i, a in enumerate(areas, start=1):
+                if a > limit:
+                    subj[clab == i] = False
+
         subj = ndimage.binary_erosion(subj, np.ones((3, 3)), iterations=ERODE_ITERS)
     return subj
 
