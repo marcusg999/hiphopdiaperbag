@@ -192,28 +192,28 @@
   "followLabel": "Follow ↗",
   "tiles": [
    {
-    "src": "assets/img/life-gallery.webp",
-    "alt": "A father wearing the bag in a gallery."
+    "src": "assets/img/gram-1.webp",
+    "alt": "Instagram post: wearing the bag on a sunlit street, captioned finally, baby gear that fits the culture, with callouts for 15 pockets and insulated."
    },
    {
-    "src": "assets/img/life-neworleans.webp",
-    "alt": "Wearing the bag on a wet New Orleans street."
+    "src": "assets/img/gram-2.webp",
+    "alt": "Instagram post: a father carrying his baby down a lit tunnel with the bag on his back. Carry the culture, streetwear style, 15 pockets."
    },
    {
-    "src": "assets/img/life-sand.webp",
-    "alt": "The bag on sand, close on the snap flap."
+    "src": "assets/img/gram-3.webp",
+    "alt": "Instagram post: a five star review calling it the ultimate Father's Day gift that matches his kicks, not a nursery. Only $55."
    },
    {
-    "src": "assets/img/life-carry.webp",
-    "alt": "A parent carrying a baby while wearing the bag."
+    "src": "assets/img/gram-4.webp",
+    "alt": "Instagram post: the bag in studio with its changing pad and insulated bottle sleeve. Carry the culture, $55."
    },
    {
-    "src": "assets/img/detail-crown.webp",
-    "alt": "The debossed leather crown patch."
+    "src": "assets/img/gram-5.webp",
+    "alt": "Instagram post: Diaper Bags. Reimagined. The bag set against generic baby gear, $55."
    },
    {
-    "src": "assets/img/life-grass.webp",
-    "alt": "The bag on grass, shot from above."
+    "src": "assets/img/gram-6.webp",
+    "alt": "Instagram post: a grid of hip hop references with the bag, captioned Incoming Drop, now $55."
    }
   ],
   "liveFeed": {
