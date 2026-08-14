@@ -216,3 +216,17 @@ addEventListener('visibilitychange', () => {
 
 /* Expose a little state for the audit harness to read. */
 window.__vitrine = { orbit, field, motes, hands, cursor };
+
+/* ---------------------------------------------------------------- the drop
+   Their campaign card, made answerable. "Pass" is not a dead end — it swaps in
+   a line and leaves the buy route open, because a notification you can only
+   say yes to is an ad, not an interaction. */
+const dropPass = $('#droppass');
+const dropPassed = $('#droppassed');
+if (dropPass && dropPassed) {
+  dropPass.addEventListener('click', () => {
+    dropPassed.hidden = false;
+    dropPass.disabled = true;
+    dropPass.textContent = 'Passed';
+  });
+}

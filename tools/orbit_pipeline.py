@@ -33,6 +33,7 @@ import numpy as np
 from PIL import Image
 from scipy import ndimage
 
+LEAK_SEAL = 3         # backdrop erosion that seals fill-leak channels
 CLOSE_ITERS = 10      # bridge radius for the matte
 ERODE_ITERS = 6       # pull the matte back inside the true edge
                       # Both tuned by eye on frames 0/66/113. The erosion is the
@@ -71,6 +72,16 @@ def silhouette(rgb, opening=0):
     ref = np.median(border, axis=0)
     near = (np.abs(rgb.astype(np.int16) - ref).max(axis=2) <= BG_TOL)
 
+    # Open the BACKDROP before labelling it. At three-quarter angles the print's
+    # white tags reach the silhouette edge and touch the backdrop through a
+    # channel one or two pixels wide. The fill pours through that channel and
+    # hollows out the middle of the bag, and because the hollow stays connected
+    # to the outside, fill_holes cannot repair it afterwards. Eroding the
+    # backdrop by a couple of pixels severs those channels before they can leak,
+    # which is the only place this can be fixed.
+    if opening:
+        near = ndimage.binary_opening(near, np.ones((3, 3)), iterations=LEAK_SEAL)
+
     # Label the backdrop-coloured regions and keep only those touching the
     # border. Anything enclosed by the subject (the white tags, the pale
     # interior of the wide-open top) is a hole, not backdrop, and survives.
@@ -103,6 +114,7 @@ def silhouette(rgb, opening=0):
         # so the fill bites notches into the outline and the product reads as a
         # bad cutout. Bridging at this radius removes the comb while leaving the
         # real concavities — the gap under the handle, the strap gaps — intact.
+        subj = ndimage.binary_fill_holes(subj)
         subj = ndimage.binary_closing(subj, np.ones((3, 3)), iterations=CLOSE_ITERS)
         subj = ndimage.binary_fill_holes(subj)
         subj = ndimage.binary_erosion(subj, np.ones((3, 3)), iterations=ERODE_ITERS)

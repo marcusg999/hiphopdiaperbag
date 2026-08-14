@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Back office — Hip Hop Diaper Bag</title>
+<meta name="theme-color" content="#0A0A0B">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <div class="bar__id">
+    <p class="placard">Physics of Hiphop <span class="sep">/</span> Los Angeles</p>
+    <h1>Back office</h1>
+  </div>
+  <div class="bar__state">
+    <p class="placard" id="state"><span class="dot" aria-hidden="true"></span><span id="statetext">Loading content.json</span></p>
+  </div>
+  <div class="bar__actions">
+    <button type="button" id="btn-preview">Preview on the page</button>
+    <button type="button" id="btn-revert">Revert all</button>
+    <button type="button" id="btn-export" class="primary">Export</button>
+  </div>
+</header>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Sections">
+    <p class="placard">Sections</p>
+    <ol id="rail"></ol>
+  </nav>
+
+  <main class="sheet">
+
+    <div class="intro">
+      <p class="placard">What this is</p>
+      <p>
+        Every word and image on the landing page lives in <code>content.json</code>.
+        Edit here, hit <strong>Preview on the page</strong> to see it on the real site
+        without saving anything, then <strong>Export</strong> to download the new
+        <code>content.json</code> and drop it in the project folder — or use the
+        optional GitHub panel at the bottom to publish straight from this browser.
+      </p>
+      <p>
+        In body copy you may use <code>&lt;em&gt;</code>, <code>&lt;b&gt;</code> and
+        <code>&lt;br&gt;</code>. Nothing else is treated as markup. In the small
+        uppercase lines, a slash <code>/</code> becomes the grey divider.
+      </p>
+    </div>
+
+    <div id="form"></div>
+
+    <!-- ------------------------------------------------------- export -->
+    <section class="sec" id="sec-export">
+      <div class="sec__h">
+        <p class="placard">01</p>
+        <h2>Export</h2>
+      </div>
+      <div class="panel">
+        <h3>Download and drop in</h3>
+        <p>
+          Downloads the edited <code>content.json</code>. Put it in the project root,
+          next to <code>index.html</code>, replacing the old one.
+        </p>
+        <p id="export-imgs">
+          No images changed.
+        </p>
+        <div class="row">
+          <button type="button" id="btn-export-json" class="primary">Download content.json</button>
+          <button type="button" id="btn-export-images">Download changed images</button>
+        </div>
+        <div class="log" id="export-log" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------- github -->
+    <section class="sec" id="sec-publish">
+      <div class="sec__h">
+        <p class="placard">02</p>
+        <h2>Publish<span class="optional">optional</span></h2>
+      </div>
+      <div class="panel">
+        <h3>Commit straight to GitHub</h3>
+        <p>
+          Optional. Export above works with no token and no account. This panel only
+          exists so you can skip the download-and-copy step: it commits
+          <code>content.json</code> and any changed images to
+          <code>marcusg999/hiphopdiaperbag</code> on <code>main</code>, and GitHub
+          Pages rebuilds by itself.
+        </p>
+        <p>
+          Paste a <strong>fine-grained personal access token</strong> with
+          <strong>Contents: Read and write</strong> on that one repository. Make it
+          short-lived.
+        </p>
+        <p class="warn">
+          The token is kept in this browser's <code>localStorage</code> and nowhere
+          else. It is never written into <code>content.json</code>, never committed,
+          never sent anywhere but <code>api.github.com</code>. On a shared machine,
+          hit <strong>Forget token</strong> when you are done.
+        </p>
+        <label class="placard" for="gh-token">GitHub token</label>
+        <input type="password" id="gh-token" autocomplete="off" spellcheck="false"
+               placeholder="github_pat_…">
+        <div class="row">
+          <button type="button" id="btn-publish" class="primary">Publish to main</button>
+          <button type="button" id="btn-forget">Forget token</button>
+        </div>
+        <div class="log" id="publish-log" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
