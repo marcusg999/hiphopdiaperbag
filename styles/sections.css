@@ -231,18 +231,26 @@ body.has-cursor .orbit { cursor: none; }
 /* ------------------------------------------------------------ ARGUMENT */
 .argument {
   display: grid;
-  grid-template-columns: var(--edge) minmax(0, 7fr) minmax(0, 5fr) 0;
+  /* Explicit track widths rather than fr ratios. The bleeding figure was
+     pulling the fr distribution around and collapsing the quote to a 238px
+     column at 1920px wide — 22 lines of 83px type, one word per line. */
+  grid-template-columns: var(--edge) minmax(0, 1fr) clamp(280px, 30vw, 520px) 0;
   align-items: center;
   gap: 0 var(--gut);
   padding: clamp(90px, 16vh, 190px) 0;
 }
-.pull { grid-column: 2; margin: 0; max-width: 22ch; }
+.pull { grid-column: 2; margin: 0; }
 .pull p {
   font-family: var(--sans);
   font-weight: 300;
   font-stretch: 92%;
-  font-size: clamp(2.5rem, 5.2vw, 5.2rem);
-  line-height: 1.02;
+  /* Sized so the quote sets in three or four lines across its column rather
+     than stacking one word per line. */
+  font-size: clamp(2rem, 3.6vw, 4rem);
+  /* Measure set here, not on the blockquote: ch resolves against this
+     element's own font-size, and on the parent it silently meant 17px. */
+  max-width: 20ch;
+  line-height: 1.06;
   letter-spacing: -.028em;
   color: var(--paper);
   margin: 0 0 22px;
@@ -353,14 +361,18 @@ body.has-cursor .orbit { cursor: none; }
 /* ------------------------------------------------------------ WHY */
 .why {
   display: grid;
-  grid-template-columns: var(--edge) minmax(0, 2fr) minmax(0, 8fr) minmax(0, 2fr) var(--edge);
+  /* The founder's statement is the emotional centre of the page, so it runs
+     the full measure rather than sitting in a narrow 324px column. The label
+     hangs in the margin beside it. */
+  grid-template-columns: var(--edge) clamp(90px, 12vw, 180px) minmax(0, 1fr) var(--edge);
   gap: 18px var(--gut);
   padding: 0 0 clamp(80px, 14vh, 170px);
 }
-.why > .placard { grid-column: 2; padding-top: 10px; }
-.why__q { grid-column: 3; margin: 0; max-width: 30ch; }
+.why > .placard { grid-column: 2; padding-top: 14px; }
+.why__q { grid-column: 3; margin: 0; }
 .why__q p {
-  font-size: clamp(1.15rem, 2vw, 1.7rem);
+  font-size: clamp(1.35rem, 2.9vw, 3rem);
+  max-width: 44ch;
   line-height: 1.4;
   color: var(--dust);
   font-weight: 300;
@@ -554,9 +566,14 @@ body.has-cursor .orbit { cursor: none; }
 .gram__handle {
   display: block;
   font-family: var(--sans); font-weight: 900; font-stretch: 80%;
-  font-size: clamp(1.5rem, 2.6vw, 2.3rem); line-height: 1;
+  /* One line, always — a wrapped @handle reads as a typo. The size is capped
+     by the column as well as the viewport so it shrinks to fit rather than
+     breaking, and word-break is off for the same reason. */
+  white-space: nowrap;
+  font-size: clamp(1.15rem, 2vw, 2.1rem);
+  line-height: 1.05;
   letter-spacing: -.02em; color: var(--paper);
-  margin: 12px 0 12px; word-break: break-word;
+  margin: 12px 0 12px;
   transition: color var(--dur-fast) var(--ease-out);
 }
 .gram__handle:hover, .gram__handle:focus-visible { color: var(--hazard); }
