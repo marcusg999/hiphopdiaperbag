@@ -1,7 +1,13 @@
 node_modules/
 .DS_Store
 *.log
-tools/netlog*.json
 shots/
-assets/video/
+tools/netlog*.json
+
+# Reference material and working files — inputs to the build, not part of the
+# deployed site. refs/*.md are the exception: they carry the sourced product
+# facts the copy is written from.
+refs/*.png
+refs/*.json
 assets/src/
+assets/video/

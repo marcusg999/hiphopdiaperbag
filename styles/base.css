@@ -71,6 +71,19 @@ main, .topbar, .foot { position: relative; z-index: 2; }
   text-wrap: balance;
 }
 .kinetic--lg { font-size: var(--t-display-lg); }
+/* The brand's own grid sets its headlines in heavy condensed uppercase, so the
+   big statements do the same: tighter width, maximum weight, stacked short. */
+.kinetic--stack,
+.kinetic--lg {
+  text-transform: uppercase;
+  line-height: .82;
+  letter-spacing: -.018em;
+}
+/* Condensed, because the reveal masks each line with overflow:hidden and a
+   wide face would be clipped by its own column. wdth 78 is also closer to the
+   compressed grotesk the brand's grid actually uses. */
+.kinetic--stack { font-size: clamp(2.4rem, 6.2vw, 5.8rem); }
+
 .kinetic--sm { font-size: clamp(2.5rem, 5vw, 5rem); }
 .kinetic .line { display: block; overflow: hidden; }
 .kinetic .w {
@@ -85,20 +98,20 @@ main, .topbar, .foot { position: relative; z-index: 2; }
    that rule is in the contract because an opacity fade is the default nobody
    remembers. */
 .kinetic[data-kinetic] .w {
-  --w: 180;
+  --w: 150;
   --wd: 62;
   --y: 105%;
 }
 .kinetic.is-in .w {
-  --w: 850;
-  --wd: 115;
+  --w: 900;
+  --wd: 108;
   --y: 0%;
   transition:
     font-variation-settings 1150ms var(--ease-out) var(--d, 0ms),
     transform 980ms var(--ease-out) var(--d, 0ms);
 }
 @media (prefers-reduced-motion: reduce) {
-  .kinetic[data-kinetic] .w { --w: 850; --wd: 115; --y: 0%; }
+  .kinetic[data-kinetic] .w { --w: 900; --wd: 108; --y: 0%; }
   .kinetic.is-in .w { transition: none; }
 }
 
@@ -148,3 +161,11 @@ main, .topbar, .foot { position: relative; z-index: 2; }
 body.has-cursor,
 body.has-cursor a,
 body.has-cursor button { cursor: none; }
+
+/* The stacked statements run condensed. This sits at the end of the file on
+   purpose: it ties with `.kinetic.is-in .w` on specificity, so source order is
+   what decides, and it has to come last to win. */
+.kinetic--stack.is-in .w,
+.kinetic--lg.is-in .w { --wd: 76; --w: 900; }
+.kinetic--stack .line,
+.kinetic--lg .line { padding-right: .06em; }
