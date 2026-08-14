@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VITRINE — cursor harness</title>
+<style>
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url("../assets/fonts/jetbrainsmono-var-latin.woff2") format("woff2-variations");
+    font-weight: 100 800; font-display: block;
+  }
+  @font-face {
+    font-family: "Archivo";
+    src: url("../assets/fonts/archivo-var-latin.woff2") format("woff2-variations");
+    font-weight: 100 900; font-stretch: 62% 125%; font-display: block;
+  }
+  :root {
+    --void:#0A0A0B; --slab:#16161A; --crete:#8E8B84;
+    --dust:#C9C5BC; --paper:#F4F2ED; --hazard:#FF4A00; --hazard-deep:#C43300;
+    --rule:#24242A;
+    --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+    --sans:"Archivo", Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--void); }
+  body {
+    color: var(--dust); font-family: var(--sans);
+    min-height: 100vh; padding: 48px 56px 120px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .placard {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--crete); line-height: 2.1;
+  }
+  h1 {
+    font-family: var(--sans); font-weight: 800; font-stretch: 78%;
+    font-size: clamp(2.5rem, 7vw, 6rem); letter-spacing: -.03em;
+    color: var(--paper); margin: 8px 0 40px; line-height: .92;
+  }
+  .rule { height: 1px; background: var(--rule); margin: 32px 0; }
+
+  /* ---- magnet targets, deliberately at different sizes ---- */
+  .row { display: flex; gap: 40px; align-items: flex-end; flex-wrap: wrap; margin: 40px 0 8px; }
+
+  .plinth {
+    width: 320px; height: 200px; background: var(--slab);
+    border: 1px solid var(--rule); display: flex; align-items: flex-end;
+    padding: 14px 16px;
+  }
+  .cta {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--void); background: var(--hazard);
+    border: 0; padding: 16px 28px; cursor: none;
+  }
+  .ghost {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--dust); background: none;
+    border: 1px solid var(--crete); padding: 14px 24px; cursor: none;
+  }
+  .pip {
+    width: 14px; height: 14px; border: 1px solid var(--crete); border-radius: 50%;
+    display: inline-block;
+  }
+  .wide {
+    width: 100%; max-width: 760px; height: 64px; border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule); display: flex; align-items: center;
+    justify-content: space-between; padding: 0 18px; margin-top: 44px;
+  }
+  [data-magnet] { cursor: none; }
+
+  .body { max-width: 54ch; margin: 44px 0; }
+  .body p { font-size: 1.05rem; line-height: 1.72; color: var(--dust); margin: 0 0 1.1em; }
+  .spec { display: grid; grid-template-columns: 12ch 1fr; gap: 2px 24px; max-width: 46ch; }
+  .spec dt { color: var(--crete); } .spec dd { color: var(--dust); margin: 0; }
+
+  /* readout for the harness only */
+  #hud {
+    position: fixed; right: 14px; bottom: 14px; font-family: var(--mono);
+    font-size: 10px; letter-spacing: .12em; color: var(--crete);
+    background: rgba(10,10,11,.86); border: 1px solid var(--rule);
+    padding: 8px 10px; white-space: pre; line-height: 1.7; z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+  <p class="placard">VITRINE / DEV / CURSOR — MAGNETIC + WARPING</p>
+  <h1>Handle<br>with care</h1>
+
+  <div class="row">
+    <div class="plinth" data-magnet data-magnet-radius="150" id="plinth">
+      <span class="placard">PLINTH — 320&times;200 — R150</span>
+    </div>
+    <button class="cta" data-magnet data-magnet-radius="110" id="cta">Acquire — $148</button>
+    <button class="ghost" data-magnet id="ghost">Provenance</button>
+    <a href="#" data-magnet data-magnet-radius="70" id="pip" aria-label="small target"><span class="pip"></span></a>
+  </div>
+  <p class="placard">R150 &nbsp;/&nbsp; R110 &nbsp;/&nbsp; R90 (DEFAULT) &nbsp;/&nbsp; R70</p>
+
+  <div class="wide" data-magnet data-magnet-radius="120" id="wide">
+    <span class="placard">WIDE TARGET — 760&times;64</span>
+    <span class="placard">R120</span>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="body">
+    <p id="para">The gallery is unlit except for one cone. Under it, on a raw concrete
+    plinth, sits a graffiti-print diaper bag — thirteen pockets, insulated bottle sleeve,
+    a changing pad folded into the back panel. There is no guard. Move the pointer across
+    this paragraph and the ring should collapse into a thin vertical bar; move it back
+    over any of the targets above and it should grow, go orange, and lean toward the
+    centre before it lands.</p>
+    <p>A near miss should produce a lean, not a snap. A direct hover should produce a
+    snap, not a wobble. Fast movement across empty ground should elongate the ring along
+    the direction of travel and relax out of it slowly.</p>
+  </div>
+
+  <div class="rule"></div>
+
+  <dl class="spec placard">
+    <dt>DIMENSIONS</dt><dd>34 &times; 26 &times; 18 CM</dd>
+    <dt>POCKETS</dt><dd>13</dd>
+    <dt>SHELL</dt><dd>600D COATED POLY</dd>
+    <dt>PRINT</dt><dd>HAND-PULLED, 4 PASS, B/W</dd>
+    <dt>EDITION</dt><dd>OPEN</dd>
+    <dt>ORIGIN</dt><dd>GUANGDONG / FINISHED LOS ANGELES</dd>
+  </dl>
+
+  <div id="hud">boot</div>
+
+<script type="module">
+  import { createCursor } from '../src/cursor.js';
+  const c = createCursor();
+  c.start();
+  window.__cursor = c;
+
+  // harness readout only — not part of the module
+  const hud = document.getElementById('hud');
+  let n = 0, t0 = performance.now(), fps = 0;
+  (function tick(t) {
+    n++;
+    if (t - t0 >= 500) { fps = Math.round((n * 1000) / (t - t0)); n = 0; t0 = t; }
+    const g = document.querySelector('[data-vitrine-cursor] g');
+    hud.textContent =
+      `FPS ${String(fps).padStart(3)}\n` +
+      `POS ${g ? g.getAttribute('transform') : '-'}\n` +
+      `WRP ${g && g.firstElementChild ? g.firstElementChild.getAttribute('transform') : '-'}`;
+    requestAnimationFrame(tick);
+  })(performance.now());
+</script>
+</body>
+</html>

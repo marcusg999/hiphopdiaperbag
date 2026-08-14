@@ -19,5 +19,8 @@
   "homepage": "https://github.com/marcusg999/hiphopdiaperbag#readme",
   "devDependencies": {
     "playwright": "^1.55.0"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^1.0.1"
   }
 }

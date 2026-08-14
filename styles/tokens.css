@@ -1,0 +1,83 @@
+/* ============================================================
+   VITRINE — tokens
+   Palette and type are contract-locked. Seven colours, one accent.
+   The graffiti print is the loudest thing on the page by design;
+   everything here exists to stay out of its way.
+   ============================================================ */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../assets/fonts/archivo-var-latin.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/jetbrainsmono-var-latin.woff2") format("woff2-variations");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ---- palette: earthy brutalist ---- */
+  --void: #0a0a0b;         /* page ground — the unlit gallery */
+  --slab: #16161a;         /* surfaces, plinth faces */
+  --crete: #8e8b84;        /* concrete mid — rules, secondary type */
+  --dust: #c9c5bc;         /* concrete light — body copy on dark */
+  --paper: #f4f2ed;        /* the lit face, headline ink */
+  --hazard: #ff4a00;       /* safety orange — the ONLY accent */
+  --hazard-deep: #c43300;  /* pressed / shadow state */
+
+  --rule: #24242a;         /* hairlines, derived from slab */
+  --rule-lit: #34343c;
+
+  /* ---- type ---- */
+  --sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* The scale contrast rule: display never below 2.5rem, placard never
+     above 13px. There is no middle. That gap IS the type system. */
+  --display-min: 2.5rem;
+  --t-display: clamp(2.5rem, 7vw, 9rem);
+  --t-display-lg: clamp(3rem, 12.5vw, 15rem);
+  --t-body: clamp(1rem, 0.94rem + 0.3vw, 1.18rem);
+  --t-placard: 11px;
+  --t-placard-lg: 13px;
+
+  --ls-display: -0.03em;
+  --ls-placard: 0.16em;
+
+  /* ---- rhythm ---- */
+  --gut: clamp(16px, 3.2vw, 40px);
+  --edge: clamp(18px, 5vw, 72px);
+  --col: calc((100% - 11 * var(--gut)) / 12);
+
+  /* ---- motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 220ms;
+  --dur: 620ms;
+  --dur-slow: 1100ms;
+}
+
+/* The page is a dark gallery at night. It does not have a light mode —
+   that is a deliberate contract decision, not an oversight. Colours are
+   therefore declared once, unconditionally, and painted explicitly. */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur: 1ms;
+    --dur-slow: 1ms;
+  }
+}

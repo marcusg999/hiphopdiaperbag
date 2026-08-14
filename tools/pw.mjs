@@ -10,12 +10,19 @@ export const NET_ARGS = [
   '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
   '--enable-webgl', '--enable-gpu-rasterization', '--ignore-gpu-blocklist',
 ];
+/**
+ * `local: true` launches with no proxy at all. The egress proxy answers plain
+ * requests to 127.0.0.1 with 405, and its bypass list does not reliably keep
+ * loopback out, so screenshotting the dev server needs the proxy gone rather
+ * than merely bypassed. External captures still need it.
+ */
 export async function launch(extraArgs = [], opts = {}) {
+  const { local = false, ...rest } = opts;
   return chromium.launch({
     executablePath: CHROME,
     args: [...NET_ARGS, ...extraArgs],
-    proxy: { server: process.env.HTTPS_PROXY || 'http://127.0.0.1:36275' },
-    ...opts,
+    ...(local ? {} : { proxy: { server: process.env.HTTPS_PROXY || 'http://127.0.0.1:36275' } }),
+    ...rest,
   });
 }
 export const DESKTOP = { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 };

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VITRINE — particles harness</title>
+<style>
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url("../assets/fonts/jetbrainsmono-var-latin.woff2") format("woff2-variations");
+    font-weight: 100 800; font-display: block;
+  }
+  :root {
+    --void:#0A0A0B; --slab:#16161A; --crete:#8E8B84;
+    --dust:#C9C5BC; --paper:#F4F2ED; --hazard:#FF4A00;
+    --rule:#24242A;
+    --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--void); overflow: hidden; }
+  #field { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+  .placard {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--crete); line-height: 2;
+  }
+  #hud {
+    position: fixed; left: 16px; top: 16px; z-index: 5;
+    background: rgba(10,10,11,.72); border: 1px solid var(--rule);
+    padding: 10px 12px; white-space: pre; font-variant-numeric: tabular-nums;
+  }
+  #hud b { color: var(--paper); font-weight: 400; }
+  #ctl { position: fixed; left: 16px; bottom: 16px; z-index: 5; }
+  #ctl button {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--dust); background: none;
+    border: 1px solid var(--rule); padding: 8px 14px; margin-right: 6px; cursor: pointer;
+  }
+  #ctl button:hover { color: var(--hazard); border-color: var(--hazard); }
+</style>
+</head>
+<body>
+  <canvas id="field"></canvas>
+  <div id="hud" class="placard">boot</div>
+  <div id="ctl">
+    <button id="left">cone left</button>
+    <button id="right">cone right</button>
+    <button id="dense">density 1.0</button>
+    <button id="sparse">density 0.35</button>
+    <button id="toggle">stop</button>
+  </div>
+
+<script type="module">
+  import { createParticles } from '../src/particles.js';
+
+  const canvas = document.getElementById('field');
+  const P = createParticles(canvas, {});
+  P.start();
+  window.__particles = P;
+
+  P.setCone(0.34, 0.55, 0.30);
+
+  addEventListener('pointermove', (e) => P.setPointer(e.clientX, e.clientY), { passive: true });
+  addEventListener('pointerleave', () => P.setPointer(NaN, NaN), { passive: true });
+
+  document.getElementById('left').onclick  = () => P.setCone(0.22, 0.50, 0.28);
+  document.getElementById('right').onclick = () => P.setCone(0.78, 0.55, 0.30);
+  document.getElementById('dense').onclick  = () => P.setDensity(1);
+  document.getElementById('sparse').onclick = () => P.setDensity(0.35);
+  let on = true;
+  document.getElementById('toggle').onclick = (e) => {
+    on = !on; on ? P.start() : P.stop();
+    e.target.textContent = on ? 'stop' : 'start';
+  };
+
+  // fps readout — harness only
+  const hud = document.getElementById('hud');
+  let n = 0, t0 = performance.now(), fps = 0, worst = 0, samples = [];
+  window.__fps = () => ({ fps, worst, avg: samples.length ? samples.reduce((a,b)=>a+b,0)/samples.length : 0 });
+  window.__resetFps = () => { samples = []; worst = 0; };
+  (function tick(t) {
+    n++;
+    if (t - t0 >= 500) {
+      fps = Math.round((n * 1000) / (t - t0));
+      samples.push(fps);
+      if (samples.length > 2) worst = worst ? Math.min(worst, fps) : fps;
+      n = 0; t0 = t;
+      hud.innerHTML =
+        `FPS <b>${String(fps).padStart(3)}</b>   FRAME <b>${P.frameMs.toFixed(1)}MS</b>\n` +
+        `MOTES <b>${String(P.count).padStart(3)}</b>   DRAW CALLS <b>${String(P.count + 1).padStart(3)}</b>\n` +
+        `VIEWPORT <b>${innerWidth}&times;${innerHeight}</b>   DPR <b>${(devicePixelRatio||1).toFixed(2)}</b>`;
+    }
+    requestAnimationFrame(tick);
+  })(performance.now());
+</script>
+</body>
+</html>

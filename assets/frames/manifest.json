@@ -1,0 +1,7 @@
+{
+ "count": 72,
+ "size": 800,
+ "pattern": "orbit_%03d.webp",
+ "source": "orbit-b.mp4",
+ "degreesPerFrame": 5.0
+}

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hip Hop Diaper Bag — Physics of Hiphop</title>
+<meta name="description" content="A graffiti-canvas diaper bag backpack with fifteen pockets, three insulated bottle holders and a USB pass-through. Because of the print, no two are cut the same. Built in Los Angeles by Physics of Hiphop.">
+<meta name="theme-color" content="#0A0A0B">
+
+<meta property="og:title" content="Hip Hop Diaper Bag — no two are cut the same">
+<meta property="og:description" content="Fifteen pockets. Three insulated. Water resistant, tested in the New Orleans rain. A diaper bag that doesn't look like a diaper bag.">
+<meta property="og:type" content="product">
+<meta property="og:image" content="assets/img/contents-hero.webp">
+
+<link rel="preload" href="assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/frames/orbit_000.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/sections.css">
+</head>
+
+<body>
+
+<!-- The motion signature: one slow concrete-and-light field, always moving. -->
+<canvas id="field" class="bg-layer" aria-hidden="true"></canvas>
+<canvas id="motes" class="bg-layer" aria-hidden="true"></canvas>
+
+<a class="skip" href="#vitrine">Skip to the bag</a>
+
+<header class="topbar">
+  <span class="placard">Physics&nbsp;of&nbsp;Hiphop <span class="sep">/</span> Los&nbsp;Angeles</span>
+  <a class="placard link" href="https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag"
+     data-magnet data-cta="topbar" target="_blank" rel="noopener">Etsy&nbsp;&nbsp;&#8599;</a>
+</header>
+
+<main>
+
+<!-- ============================================================ HERO -->
+<section class="hero" id="vitrine">
+
+  <div class="hero__type">
+    <p class="placard placard--eyebrow">Acquisition <span class="sep">/</span> 001</p>
+    <h1 class="kinetic" data-kinetic>
+      <span class="line"><span class="w">No</span> <span class="w">two</span></span>
+      <span class="line"><span class="w">are</span> <span class="w">cut</span></span>
+      <span class="line"><span class="w">the</span> <span class="w hz">same.</span></span>
+    </h1>
+    <p class="lede">
+      The graffiti runs off the edge of every panel before it is cut, so no two bags
+      are ever sewn from the same piece of it. Fifteen pockets. Three of them insulated.
+      A diaper bag that does not look like a diaper bag.
+    </p>
+  </div>
+
+  <!-- the vitrine: the product, lit, on a plinth, turnable -->
+  <div class="vitrine">
+    <div class="vitrine__light" aria-hidden="true"></div>
+    <div class="vitrine__stage" id="stage">
+      <canvas id="orbit" class="orbit"
+              aria-label="The Hip Hop Diaper Bag, rotating. Drag to turn it."
+              role="img"></canvas>
+      <div class="plinth" aria-hidden="true"><i></i></div>
+    </div>
+
+    <div class="vitrine__hud">
+      <p class="placard hint" id="hint">Drag to turn</p>
+      <button class="handbtn" id="handbtn" data-magnet type="button">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">Turn it with your hand</span>
+      </button>
+      <p class="placard tiny" id="handstate" role="status" aria-live="polite"></p>
+    </div>
+
+    <video id="cam" class="cam" playsinline muted aria-hidden="true"></video>
+  </div>
+
+  <!-- the museum wall label -->
+  <aside class="label">
+    <p class="placard label__t">Hip Hop Diaper Bag</p>
+    <dl class="label__dl">
+      <dt>Maker</dt><dd>Physics of Hiphop, Los&nbsp;Angeles</dd>
+      <dt>Material</dt><dd>Printed canvas, tan leather, nickel hardware</dd>
+      <dt>Dimensions</dt><dd>16.5 &times; 16.5 &times; 7.9 in</dd>
+      <dt>Storage</dt><dd>Fifteen pockets, three insulated</dd>
+      <dt>Power</dt><dd>USB pass&#8209;through, battery not included</dd>
+      <dt>Edition</dt><dd>No two cut alike</dd>
+    </dl>
+  </aside>
+
+  <p class="scrollcue placard" aria-hidden="true">Scroll</p>
+</section>
+
+
+<!-- ============================================================ ARGUMENT -->
+<section class="argument" data-reveal>
+  <blockquote class="pull">
+    <p>Dads often complain about carrying a diaper bag that <em>looks like a diaper bag.</em>
+       Moms complain that doctor bags don't have enough style.</p>
+    <cite class="placard">Successful Black Parenting Magazine</cite>
+  </blockquote>
+  <figure class="argument__fig bleed-right">
+    <img src="assets/img/life-gallery.webp" alt="A father wearing the bag in a gallery, a stroller behind him." loading="lazy" decoding="async" width="1200" height="1600">
+    <figcaption class="placard">Worn, not styled. Los Angeles.</figcaption>
+  </figure>
+</section>
+
+
+<!-- ============================================================ SPEC / pinned -->
+<section class="spec" id="spec">
+  <div class="spec__sticky">
+    <p class="placard">Storage <span class="sep">/</span> fifteen</p>
+    <p class="spec__count" id="speccount" aria-hidden="true">01</p>
+    <h2 class="kinetic kinetic--sm" data-kinetic>
+      <span class="line"><span class="w">Everything</span></span>
+      <span class="line"><span class="w">has</span> <span class="w">a</span> <span class="w">home.</span></span>
+    </h2>
+    <figure class="spec__img">
+      <img src="assets/img/in-the-box.webp" alt="The bag with its insulated bottle sleeve, two stroller straps and USB cable." loading="lazy" decoding="async" width="1300" height="1300">
+    </figure>
+  </div>
+
+  <ol class="spec__list" id="speclist">
+    <li data-spec><b>Three</b> insulated bottle holders, inside the main compartment.</li>
+    <li data-spec><b>Two</b> side pockets, one of which dispenses wipes through a slot.</li>
+    <li data-spec><b>Two</b> small slots for the things you lose — keys, a pacifier, a card.</li>
+    <li data-spec><b>Two</b> inner side pockets.</li>
+    <li data-spec><b>Two</b> medium slots.</li>
+    <li data-spec><b>One</b> large front pocket under the snap flap.</li>
+    <li data-spec><b>One</b> large mesh pocket.</li>
+    <li data-spec><b>One</b> medium zipped inner pocket.</li>
+    <li data-spec><b>One</b> hidden pocket. You'll find it.</li>
+    <li data-spec class="spec__end"><b>Fifteen.</b> Plus a top that opens wide enough to see the bottom.</li>
+  </ol>
+</section>
+
+
+<!-- ============================================================ EVIDENCE -->
+<section class="evidence">
+  <figure class="ev ev--rain bleed-left" data-reveal>
+    <img src="assets/img/life-neworleans.webp" alt="Someone wearing the bag on a rain-wet New Orleans street." loading="lazy" decoding="async" width="1316" height="1519">
+    <figcaption>
+      <blockquote><p>Not only is it water resistant — tested in the New Orleans rain — it allows for a lot to be packed for the people on the go.</p></blockquote>
+      <cite class="placard">MSM <span class="sep">/</span> verified purchase <span class="sep">/</span> 5&#9733;</cite>
+    </figcaption>
+  </figure>
+
+  <figure class="ev ev--usb" data-reveal>
+    <img src="assets/img/detail-usb.webp" alt="A power bank inserted into the bag's USB pass-through pocket." loading="lazy" decoding="async" width="1200" height="1600">
+    <figcaption>
+      <blockquote><p>Good insulation for maintaining bottle temps, and it even comes with a port for you to charge your phone — you just need a portable battery charger, not included.</p></blockquote>
+      <cite class="placard">A.E. <span class="sep">/</span> verified purchase <span class="sep">/</span> 5&#9733;</cite>
+    </figcaption>
+  </figure>
+
+  <figure class="ev ev--crown" data-reveal>
+    <img src="assets/img/detail-crown.webp" alt="Macro of the debossed tan leather crown patch on the graffiti canvas." loading="lazy" decoding="async" width="640" height="640">
+    <figcaption><cite class="placard">The mark, debossed into tan leather</cite></figcaption>
+  </figure>
+
+  <figure class="ev ev--sand" data-reveal>
+    <img src="assets/img/life-sand.webp" alt="The bag on sand, close on the snap flap and leather tab." loading="lazy" decoding="async" width="1280" height="1268">
+    <figcaption>
+      <blockquote><p>It definitely serves as a catalyst for discussion anywhere I go.</p></blockquote>
+      <cite class="placard">MSM <span class="sep">/</span> verified purchase</cite>
+    </figcaption>
+  </figure>
+</section>
+
+
+<!-- ============================================================ WHY -->
+<section class="why" data-reveal>
+  <p class="placard">Why it exists</p>
+  <blockquote class="why__q">
+    <p>It was fascinating to me to go to a b&#8209;boy battle in Los Angeles and see all of the
+       infants wearing colorful earmuffs being carried around by their parents. The next
+       thought was &mdash; look at all of the amazing fathers hiphop has nurtured.</p>
+    <p>But where are the specific tools for the hiphop parent? How are we as a culture
+       celebrating this space where parenthood and hiphop meet?
+       <em>Hip Hop Diaper Bag is my answer.</em></p>
+    <cite class="placard">Marcus Gray <span class="sep">/</span> founder <span class="sep">/</span> Physics of Hiphop</cite>
+  </blockquote>
+  <p class="why__tag" aria-label="hashtag hiphop is not a single parent">#hiphopisnotasingleparent</p>
+</section>
+
+
+<!-- ============================================================ CTA -->
+<section class="cta" id="acquire">
+  <div class="cta__inner">
+    <p class="placard">Available now <span class="sep">/</span> one colourway <span class="sep">/</span> ships from Los Angeles</p>
+    <h2 class="kinetic kinetic--lg" data-kinetic>
+      <span class="line"><span class="w">Take</span> <span class="w">one</span></span>
+      <span class="line"><span class="w hz">home.</span></span>
+    </h2>
+    <a class="buy" href="https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag"
+       data-magnet data-magnet-radius="150" data-cta="primary" target="_blank" rel="noopener">
+      <span class="buy__l">Acquire on Etsy</span>
+      <span class="buy__a" aria-hidden="true">&#8599;</span>
+    </a>
+    <p class="cta__note placard">
+      4.8&#9733; across 51 ratings <span class="sep">/</span> includes changing pad,
+      insulated bottle sleeve, two stroller straps and a USB cable
+    </p>
+  </div>
+  <img class="cta__img bleed-right" src="assets/img/life-carry.webp" alt="A parent carrying a baby on one shoulder while wearing the bag." loading="lazy" decoding="async" width="828" height="1032">
+</section>
+
+</main>
+
+<footer class="foot">
+  <p class="placard">Physics of Hiphop <span class="sep">/</span> Los Angeles <span class="sep">/</span> hiphopisnotasingleparent</p>
+  <a class="placard link" href="https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag"
+     data-magnet data-cta="footer" target="_blank" rel="noopener">Etsy&nbsp;&#8599;</a>
+</footer>
+
+<script type="module" src="src/main.js"></script>
+<noscript>
+  <style>.orbit{display:none}.vitrine__hud{display:none}</style>
+</noscript>
+</body>
+</html>

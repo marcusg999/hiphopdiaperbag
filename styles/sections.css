@@ -1,0 +1,452 @@
+/* ============================================================
+   VITRINE — sections
+   Broken 12-column grid. The vitrine column sits at 0.38/0.62 and
+   nothing on this page is ever horizontally centred.
+   ============================================================ */
+
+/* ------------------------------------------------------------ HERO */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: [full-start] var(--edge) [text-start] minmax(0, 38fr)
+                         [text-end] minmax(0, 62fr) [stage-end] var(--edge) [full-end];
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  padding-top: clamp(88px, 12vh, 140px);
+  padding-bottom: clamp(28px, 5vh, 56px);
+  row-gap: clamp(20px, 4vh, 48px);
+}
+
+.hero__type {
+  grid-column: text-start / text-end;
+  grid-row: 1;
+  max-width: 30ch;
+  z-index: 3;
+  /* pushed off the vertical centre on purpose */
+  align-self: center;
+  margin-top: -4vh;
+}
+.placard--eyebrow { margin-bottom: 20px; color: var(--hazard); }
+.hero h1 { margin-bottom: 26px; }
+.lede {
+  color: var(--crete);
+  max-width: 38ch;
+  font-size: clamp(.95rem, .9rem + .25vw, 1.1rem);
+  line-height: 1.62;
+}
+
+/* ---- the vitrine ---- */
+.vitrine {
+  grid-column: text-end / stage-end;
+  grid-row: 1;
+  position: relative;
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  min-height: min(66svh, 660px);
+}
+
+/* The light cone falling on the plinth. Two parts: a wide soft wash that lifts
+   the wall behind the product, and a narrow shaft that actually reads as a
+   beam. The dust field is what makes the shaft visible — this is only the
+   gradient it hangs in. */
+.vitrine__light {
+  position: absolute;
+  left: 50%; top: -22%;
+  width: min(150%, 980px); height: 128%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 40% 34% at 50% 30%,
+      rgba(244, 242, 237, .16) 0%,
+      rgba(244, 242, 237, .06) 40%,
+      rgba(244, 242, 237, 0) 70%),
+    conic-gradient(from 168deg at 50% -6%,
+      transparent 0deg, rgba(244, 242, 237, .055) 5deg,
+      rgba(244, 242, 237, .075) 12deg, rgba(244, 242, 237, .055) 19deg,
+      transparent 24deg);
+  filter: blur(10px);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 96%);
+}
+
+/* the pool of light the product stands in */
+.vitrine__light::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 8%;
+  width: 62%; height: 12%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 50% at 50% 50%,
+    rgba(244, 242, 237, .10), transparent 72%);
+  filter: blur(14px);
+}
+
+.vitrine__stage {
+  position: relative;
+  width: min(100%, 620px);
+  aspect-ratio: 1 / 1.06;
+  display: grid;
+  place-items: end center;
+  touch-action: pan-y;
+}
+
+.orbit {
+  width: 100%;
+  height: 100%;
+  grid-area: 1 / 1;
+  cursor: grab;
+  filter: drop-shadow(0 34px 44px rgba(0, 0, 0, .72));
+  /* The render leaves a sliver of its own contact shadow at the very base of
+     the matte. Fading the last 2% of the canvas hides it and hands the job of
+     grounding the product to the plinth below, where it belongs. */
+  mask-image: linear-gradient(to bottom, #000 0%, #000 97.5%, transparent 100%);
+}
+.vitrine__stage.is-grabbing .orbit { cursor: grabbing; }
+body.has-cursor .orbit { cursor: none; }
+
+/* the plinth — a slab edge and the contact shadow, not a box-shadow pretending
+   to be 3D: a hard top edge, a soft pool under the product */
+/* The plinth is one lit edge and a contact shadow — not a box pretending to be
+   3D. The edge catches the beam at its centre and falls off to nothing. */
+.plinth {
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: center;
+  width: 86%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(142, 139, 132, .25) 14%,
+    rgba(244, 242, 237, .72) 50%,
+    rgba(142, 139, 132, .25) 86%, transparent 100%);
+  position: relative;
+  margin-bottom: 4.5%;
+}
+/* the shadow the product casts onto that edge */
+.plinth i {
+  position: absolute;
+  left: 50%; top: -13px;
+  width: 46%; height: 26px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 60% at 50% 100%,
+    rgba(0, 0, 0, .95) 0%, rgba(0, 0, 0, .55) 45%, transparent 78%);
+  filter: blur(7px);
+}
+/* and the faint reflection below it, which is what sells a plinth */
+.plinth::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 1px;
+  width: 40%; height: 54px;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, rgba(244, 242, 237, .05), transparent 82%);
+  filter: blur(5px);
+}
+
+.vitrine__hud {
+  position: absolute;
+  right: 0; bottom: 2%;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+  z-index: 4;
+}
+.hint { transition: opacity var(--dur) var(--ease-out); }
+.hint.is-hidden { opacity: 0; }
+
+.handbtn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent;
+  border: 1px solid var(--rule-lit);
+  color: var(--dust);
+  font-family: var(--mono);
+  font-size: var(--t-placard);
+  letter-spacing: var(--ls-placard);
+  text-transform: uppercase;
+  padding: 11px 15px 10px;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+.handbtn:hover, .handbtn:focus-visible { border-color: var(--hazard); color: var(--paper); }
+.handbtn .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--crete);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.handbtn.is-live { border-color: var(--hazard); color: var(--paper); }
+.handbtn.is-live .dot { background: var(--hazard); animation: pulse 1.6s var(--ease-in-out) infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+#handstate { min-height: 15px; color: var(--hazard); }
+
+/* the webcam preview: small, cornered, mirrored, never the point */
+.cam {
+  position: absolute;
+  right: 0; top: 0;
+  width: 132px; aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transform: scaleX(-1);
+  border: 1px solid var(--rule-lit);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease-out);
+  filter: grayscale(1) contrast(1.15) brightness(.72);
+}
+.cam.is-live { opacity: .5; }
+
+/* the museum wall label, hung to the left of the plinth */
+.label {
+  grid-column: text-start / text-end;
+  grid-row: 2;
+  align-self: end;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+  max-width: 34ch;
+}
+.label__t { color: var(--paper); margin-bottom: 10px; }
+.label__dl {
+  display: grid;
+  grid-template-columns: 8.5em 1fr;
+  gap: 5px 14px;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.label__dl dt { color: var(--rule-lit); }
+.label__dl dd { margin: 0; color: var(--crete); }
+
+.scrollcue {
+  grid-column: stage-end / full-end;
+  grid-row: 2;
+  align-self: end;
+  writing-mode: vertical-rl;
+  justify-self: center;
+  color: var(--rule-lit);
+}
+
+/* ------------------------------------------------------------ ARGUMENT */
+.argument {
+  display: grid;
+  grid-template-columns: var(--edge) minmax(0, 7fr) minmax(0, 5fr) 0;
+  align-items: center;
+  gap: 0 var(--gut);
+  padding: clamp(90px, 16vh, 190px) 0;
+}
+.pull { grid-column: 2; margin: 0; max-width: 22ch; }
+.pull p {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-stretch: 92%;
+  font-size: clamp(2.5rem, 5.2vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -.028em;
+  color: var(--paper);
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+.pull p em { font-style: normal; color: var(--hazard); }
+.argument__fig { grid-column: 3 / -1; }
+.argument__fig img { width: 100%; filter: grayscale(.35) contrast(1.05); }
+.argument__fig figcaption { margin-top: 12px; }
+
+/* ------------------------------------------------------------ SPEC (pinned) */
+.spec {
+  display: grid;
+  grid-template-columns: var(--edge) minmax(0, 6fr) minmax(0, 6fr) var(--edge);
+  gap: 0 var(--gut);
+  padding: clamp(60px, 10vh, 130px) 0 clamp(90px, 16vh, 200px);
+}
+.spec__sticky {
+  grid-column: 2;
+  position: sticky;
+  top: 14vh;
+  align-self: start;
+  height: fit-content;
+}
+.spec__count {
+  font-family: var(--mono);
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 1;
+  color: var(--hazard);
+  margin: 6px 0 4px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 300;
+}
+.spec__img { margin: 26px 0 0; max-width: 78%; }
+.spec__img img { width: 100%; }
+
+.spec__list {
+  grid-column: 3;
+  list-style: none;
+  margin: 0;
+  padding: 22vh 0 30vh;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(30px, 9vh, 88px);
+}
+.spec__list li {
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
+  color: var(--rule-lit);
+  max-width: 26ch;
+  transition: color 520ms var(--ease-out);
+}
+.spec__list li b { font-weight: 700; color: inherit; }
+.spec__list li.is-on { color: var(--dust); }
+.spec__list li.is-on b { color: var(--paper); }
+.spec__list li.spec__end.is-on b { color: var(--hazard); }
+
+/* ------------------------------------------------------------ EVIDENCE */
+.evidence {
+  display: grid;
+  grid-template-columns: var(--edge) repeat(12, minmax(0, 1fr)) var(--edge);
+  gap: clamp(50px, 9vh, 110px) var(--gut);
+  padding: 0 0 clamp(90px, 16vh, 190px);
+  align-items: start;
+}
+.ev { margin: 0; }
+.ev img { width: 100%; }
+.ev figcaption { margin-top: 14px; max-width: 34ch; }
+.ev blockquote { margin: 0 0 10px; }
+.ev blockquote p {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--dust);
+  margin: 0;
+}
+.ev cite { font-style: normal; display: block; }
+
+.ev--rain { grid-column: 1 / span 7; }
+.ev--rain img { filter: contrast(1.06); }
+.ev--usb { grid-column: 9 / span 5; margin-top: 14vh; }
+.ev--crown { grid-column: 3 / span 4; }
+.ev--sand { grid-column: 8 / span 6; margin-top: -6vh; }
+
+/* ------------------------------------------------------------ WHY */
+.why {
+  display: grid;
+  grid-template-columns: var(--edge) minmax(0, 2fr) minmax(0, 8fr) minmax(0, 2fr) var(--edge);
+  gap: 18px var(--gut);
+  padding: 0 0 clamp(80px, 14vh, 170px);
+}
+.why > .placard { grid-column: 2; padding-top: 10px; }
+.why__q { grid-column: 3; margin: 0; max-width: 30ch; }
+.why__q p {
+  font-size: clamp(1.15rem, 2vw, 1.7rem);
+  line-height: 1.4;
+  color: var(--dust);
+  font-weight: 300;
+  margin: 0 0 1em;
+}
+.why__q p em { font-style: normal; color: var(--paper); font-weight: 500; }
+.why__q cite { font-style: normal; display: block; margin-top: 18px; }
+.why__tag {
+  grid-column: 2 / -1;
+  font-family: var(--sans);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-size: clamp(1.6rem, 6.4vw, 5.6rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rule-lit);
+  margin: clamp(30px, 6vh, 70px) 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------ CTA */
+.cta {
+  display: grid;
+  grid-template-columns: var(--edge) minmax(0, 7fr) minmax(0, 5fr) 0;
+  gap: 0 var(--gut);
+  align-items: center;
+  padding: 0 0 clamp(70px, 12vh, 140px);
+}
+.cta__inner { grid-column: 2; }
+.cta h2 { margin: 18px 0 34px; }
+.cta__img { grid-column: 3 / -1; width: 100%; filter: grayscale(.3); }
+
+.buy {
+  display: inline-flex; align-items: center; gap: 18px;
+  border: 1px solid var(--hazard);
+  color: var(--hazard);
+  padding: 18px 26px 16px;
+  font-family: var(--mono);
+  font-size: var(--t-placard-lg);
+  letter-spacing: var(--ls-placard);
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.buy::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: var(--hazard);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 480ms var(--ease-out);
+}
+.buy:hover, .buy:focus-visible { color: var(--void); }
+.buy:hover::before, .buy:focus-visible::before { transform: scaleX(1); }
+.buy__a { transition: transform var(--dur-fast) var(--ease-out); }
+.buy:hover .buy__a { transform: translate(3px, -3px); }
+.cta__note { margin-top: 22px; max-width: 40ch; }
+
+/* ------------------------------------------------------------ MOBILE
+   The shader field degrades before the product does. */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: var(--edge) 1fr var(--edge);
+    grid-template-rows: auto auto auto;
+    min-height: auto;
+    padding-top: clamp(96px, 18vh, 140px);
+    padding-bottom: 30px;
+    row-gap: 26px;
+  }
+  .hero__type { grid-column: 2; grid-row: 1; margin-top: 0; max-width: none; }
+  .vitrine { grid-column: 1 / -1; grid-row: 2; min-height: 62svh; }
+  .vitrine__stage { width: min(88%, 460px); }
+  .vitrine__hud { right: var(--edge); bottom: 0; }
+  .label { grid-column: 2; grid-row: 3; max-width: none; }
+  .label__dl { grid-template-columns: 7.5em 1fr; }
+  .scrollcue { display: none; }
+  .cam { right: var(--edge); width: 96px; }
+
+  .argument { grid-template-columns: var(--edge) 1fr var(--edge); row-gap: 40px; padding: 90px 0; }
+  .pull { grid-column: 2; max-width: none; }
+  .argument__fig { grid-column: 2 / -1; }
+
+  .spec { grid-template-columns: var(--edge) 1fr var(--edge); row-gap: 18px; }
+  .spec__sticky { grid-column: 2; position: static; }
+  .spec__img { max-width: 62%; }
+  .spec__list { grid-column: 2; padding: 30px 0 10px; gap: 26px; }
+  .spec__list li { color: var(--dust); max-width: none; }
+  .spec__list li b { color: var(--paper); }
+
+  .evidence { grid-template-columns: var(--edge) 1fr var(--edge); gap: 54px 0; }
+  .ev--rain, .ev--usb, .ev--crown, .ev--sand { grid-column: 2; margin-top: 0; }
+  .ev--rain { margin-left: calc(var(--edge) * -1); }
+  .ev--crown { max-width: 64%; }
+
+  .why { grid-template-columns: var(--edge) 1fr var(--edge); }
+  .why > .placard, .why__q { grid-column: 2; }
+  .why__q { max-width: none; }
+  .why__tag { grid-column: 2 / -1; }
+
+  .cta { grid-template-columns: var(--edge) 1fr var(--edge); row-gap: 44px; }
+  .cta__inner { grid-column: 2; }
+  .cta__img { grid-column: 2 / -1; }
+
+  .bleed-right { margin-right: calc(var(--edge) * -1); }
+  .bleed-left { margin-left: calc(var(--edge) * -1); }
+}
+
+@media (max-width: 560px) {
+  .label__dl { grid-template-columns: 1fr; gap: 2px; }
+  .label__dl dd { margin-bottom: 8px; }
+  .vitrine__hud { position: static; align-items: flex-start; padding: 0 var(--edge); margin-top: 10px; }
+  .cam { top: auto; bottom: 0; }
+}
