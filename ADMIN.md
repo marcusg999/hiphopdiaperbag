@@ -91,3 +91,39 @@ a token. It is entirely optional — way 1 does the same job with no token.
   `(await import('./src/content.js')).applyContent({preview:false})` in the
   console and confirm the visible copy does not change. If something moves,
   `content.json` and the markup have drifted apart.
+
+---
+
+## Mirroring the real Instagram feed
+
+The six tiles in the Instagram section are curated images by default. They can
+also mirror the live account.
+
+**Why it needs one extra piece.** A static site cannot call Instagram directly.
+The old Basic Display API is gone, and the current Graph API needs a long-lived
+token that expires every ~60 days. That token cannot be put in this repository —
+it is public, so anything shipped to the browser is published. Something has to
+hold the token off-page.
+
+**The easy way (no server).** Connect Instagram once at a widget service that
+holds and refreshes the token for you — Behold, SnapWidget and LightWidget all
+do this, and all have free tiers. They give you a JSON URL. Then in `/admin/`,
+or directly in `content.json`:
+
+```json
+"liveFeed": { "enabled": true, "endpoint": "https://feeds.behold.so/YOURID", "limit": 6 }
+```
+
+**The self-hosted way.** A Cloudflare Worker or Netlify function holding the
+token as a secret and returning the Graph API response. Same field, your URL,
+no third party in the path.
+
+`src/gram.js` accepts all three common response shapes (Behold's `posts`, the
+Graph API's `data`, or a plain array) so you are not locked to one provider.
+
+**It fails safe.** If the endpoint 404s, times out, rate-limits or returns
+something unrecognised, the curated tiles stay exactly as they are. Verified:
+with the endpoint returning a 500, all six tiles survive untouched and no error
+reaches the console. An empty grid on a shop page is worse than a stale one.
+
+**Never paste an access token into `content.json`.** It is served publicly.
