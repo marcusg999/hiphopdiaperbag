@@ -1,231 +1,231 @@
 {
- "_readme": "This file holds every word and every image path on the Hip Hop Diaper Bag landing page — edit it here and the page follows. Edit it by hand, or open admin/index.html in a browser, change the fields, and either export a new content.json into this folder or let the admin commit it to GitHub; the live site picks it up on the next load. Formatting notes: a slash ( / ) inside a placard line becomes the small grey divider, and inside body copy you may use <em>italics</em>, <b>bold</b> and <br> — nothing else is treated as markup.",
- "version": 1,
- "seo": {
-  "pageTitle": "Carry the Culture — Hip Hop Diaper Bag",
-  "metaDescription": "A graffiti-canvas diaper bag backpack with fifteen pockets, three insulated bottle holders and a USB pass-through. Because of the print, no two are cut the same. Built in Los Angeles by Physics of Hiphop."
- },
- "topbar": {
-  "makerLine": "Physics of Hiphop / Los Angeles",
-  "etsyLinkLabel": "Get yours  ↗",
-  "etsyLinkUrl": "https://www.etsy.com/shop/OgHipHopDiaperBag?ref=anchored_listing"
- },
- "hero": {
-  "eyebrow": "Diaper bags / reimagined",
-  "headline": {
-   "line1": "Carry",
-   "line2": "the",
-   "line3": "culture"
+  "_readme": "This file holds every word and every image path on the Hip Hop Diaper Bag landing page — edit it here and the page follows. Edit it by hand, or open admin/index.html in a browser, change the fields, and either export a new content.json into this folder or let the admin commit it to GitHub; the live site picks it up on the next load. Formatting notes: a slash ( / ) inside a placard line becomes the small grey divider, and inside body copy you may use <em>italics</em>, <b>bold</b> and <br> — nothing else is treated as markup.",
+  "version": 1,
+  "seo": {
+    "pageTitle": "Carry the Culture — Hip Hop Diaper Bag",
+    "metaDescription": "A graffiti-canvas diaper bag backpack with fifteen pockets, three insulated bottle holders and a USB pass-through. Because of the print, no two are cut the same. Built in Los Angeles by Physics of Hiphop."
   },
-  "lede": "Not your generic baby gear. Fifteen pockets, three of them insulated, a USB pass-through and stroller straps — wrapped in a graffiti canvas that runs off the edge of every panel, so <em>no two bags are cut the same.</em>",
-  "buyButton": {
-   "label": "Buy now",
-   "price": "$55",
-   "priceWas": "$65",
-   "url": "https://www.etsy.com/shop/OgHipHopDiaperBag?ref=anchored_listing"
+  "topbar": {
+    "makerLine": "Physics of Hiphop / Los Angeles",
+    "etsyLinkLabel": "Get yours  ↗",
+    "etsyLinkUrl": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag?ref=shop_home_feat_1&sh_rv=1&frs=1&logging_key=fc332b089c4ce3378bb0119b2c46e5dbb8418cfa%3A4504765328"
   },
-  "buyNote": "Ships from Los Angeles / 4.8★ · 51 ratings",
-  "dragHint": "Drag to turn",
-  "handButtonLabel": "Turn it with your hand",
-  "orbitAltText": "The Hip Hop Diaper Bag, rotating. Drag to turn it.",
-  "scrollCue": "Scroll"
- },
- "wallLabel": {
-  "title": "Hip Hop Diaper Bag",
-  "rows": [
-   {
-    "term": "Maker",
-    "value": "Physics of Hiphop, Los Angeles"
-   },
-   {
-    "term": "Material",
-    "value": "Printed canvas, tan leather, nickel hardware"
-   },
-   {
-    "term": "Dimensions",
-    "value": "16.5 × 16.5 × 7.9 in"
-   },
-   {
-    "term": "Storage",
-    "value": "Fifteen pockets, three insulated"
-   },
-   {
-    "term": "Power",
-    "value": "USB pass-through, battery not included"
-   },
-   {
-    "term": "Edition",
-    "value": "No two cut alike"
-   }
-  ]
- },
- "pullQuote": {
-  "quote": "Dads often complain about carrying a diaper bag that <em>looks like a diaper bag.</em> Moms complain that doctor bags don't have enough style.",
-  "attribution": "Successful Black Parenting Magazine",
-  "image": {
-   "src": "assets/img/life-gallery.webp",
-   "alt": "A father wearing the bag in a gallery, a stroller behind him.",
-   "caption": "Worn, not styled. Los Angeles."
+  "hero": {
+    "eyebrow": "Diaper bags / reimagined",
+    "headline": {
+      "line1": "Carry",
+      "line2": "the",
+      "line3": "culture"
+    },
+    "lede": "Not your generic baby gear. Fifteen pockets, three of them insulated, a USB pass-through and stroller straps — wrapped in a graffiti canvas that runs off the edge of every panel, so <em>no two bags are cut the same.</em>",
+    "buyButton": {
+      "label": "Buy now",
+      "price": "$55",
+      "priceWas": "$65",
+      "url": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag?ref=shop_home_feat_1&sh_rv=1&frs=1&logging_key=fc332b089c4ce3378bb0119b2c46e5dbb8418cfa%3A4504765328"
+    },
+    "buyNote": "Ships from Los Angeles / 4.8★ · 51 ratings",
+    "dragHint": "Drag to turn",
+    "handButtonLabel": "Turn it with your hand",
+    "orbitAltText": "The Hip Hop Diaper Bag, rotating. Drag to turn it.",
+    "scrollCue": "Scroll"
+  },
+  "wallLabel": {
+    "title": "Hip Hop Diaper Bag",
+    "rows": [
+      {
+        "term": "Maker",
+        "value": "Physics of Hiphop, Los Angeles"
+      },
+      {
+        "term": "Material",
+        "value": "Printed canvas, tan leather, nickel hardware"
+      },
+      {
+        "term": "Dimensions",
+        "value": "16.5 × 16.5 × 7.9 in"
+      },
+      {
+        "term": "Storage",
+        "value": "Fifteen pockets, three insulated"
+      },
+      {
+        "term": "Power",
+        "value": "USB pass-through, battery not included"
+      },
+      {
+        "term": "Edition",
+        "value": "No two cut alike"
+      }
+    ]
+  },
+  "pullQuote": {
+    "quote": "Dads often complain about carrying a diaper bag that <em>looks like a diaper bag.</em> Moms complain that doctor bags don't have enough style.",
+    "attribution": "Successful Black Parenting Magazine",
+    "image": {
+      "src": "assets/img/life-gallery.webp",
+      "alt": "A father wearing the bag in a gallery, a stroller behind him.",
+      "caption": "Worn, not styled. Los Angeles."
+    }
+  },
+  "featureStrip": {
+    "items": [
+      {
+        "figure": "15",
+        "label": "pockets & USB port"
+      },
+      {
+        "figure": "3",
+        "label": "insulated bottle holders"
+      },
+      {
+        "figure": "H₂O",
+        "label": "water resistant"
+      },
+      {
+        "figure": "2",
+        "label": "stroller straps"
+      },
+      {
+        "figure": "1",
+        "label": "wipe dispenser"
+      }
+    ]
+  },
+  "spec": {
+    "eyebrow": "Storage / fifteen",
+    "headline": {
+      "line1": "Everything",
+      "line2": "has a home."
+    },
+    "image": {
+      "src": "assets/img/in-the-box.webp",
+      "alt": "The bag with its insulated bottle sleeve, two stroller straps and USB cable."
+    },
+    "items": [
+      "<b>Three</b> insulated bottle holders, inside the main compartment.",
+      "<b>Two</b> side pockets, one of which dispenses wipes through a slot.",
+      "<b>Two</b> small slots for the things you lose — keys, a pacifier, a card.",
+      "<b>Two</b> inner side pockets.",
+      "<b>Two</b> medium slots.",
+      "<b>One</b> large front pocket under the snap flap.",
+      "<b>One</b> large mesh pocket.",
+      "<b>One</b> medium zipped inner pocket.",
+      "<b>One</b> hidden pocket. You'll find it.",
+      "<b>Fifteen.</b> Plus a top that opens wide enough to see the bottom."
+    ]
+  },
+  "evidence": {
+    "rain": {
+      "image": {
+        "src": "assets/img/life-neworleans.webp",
+        "alt": "Someone wearing the bag on a rain-wet New Orleans street."
+      },
+      "quote": "Not only is it water resistant — tested in the New Orleans rain — it allows for a lot to be packed for the people on the go.",
+      "attribution": "MSM / verified purchase / 5★"
+    },
+    "usb": {
+      "image": {
+        "src": "assets/img/detail-usb.webp",
+        "alt": "A power bank inserted into the bag's USB pass-through pocket."
+      },
+      "quote": "Good insulation for maintaining bottle temps, and it even comes with a port for you to charge your phone — you just need a portable battery charger, not included.",
+      "attribution": "A.E. / verified purchase / 5★"
+    },
+    "crown": {
+      "image": {
+        "src": "assets/img/detail-crown.webp",
+        "alt": "Macro of the debossed tan leather crown patch on the graffiti canvas."
+      },
+      "quote": "",
+      "attribution": "The mark, debossed into tan leather"
+    },
+    "sand": {
+      "image": {
+        "src": "assets/img/life-sand.webp",
+        "alt": "The bag on sand, close on the snap flap and leather tab."
+      },
+      "quote": "It definitely serves as a catalyst for discussion anywhere I go.",
+      "attribution": "MSM / verified purchase"
+    }
+  },
+  "drop": {
+    "eyebrow": "Incoming drop / now",
+    "title": "HipHop Diaper Bag wants to share the culture.",
+    "body": "Fifteen pockets of pure function with streetwear DNA. Now $55, was $65.",
+    "passButtonLabel": "Pass",
+    "buyButtonLabel": "Cop now",
+    "buyButtonUrl": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag?ref=shop_home_feat_1&sh_rv=1&frs=1&logging_key=fc332b089c4ce3378bb0119b2c46e5dbb8418cfa%3A4504765328",
+    "passedMessage": "Respect. It'll be here when the stroller stops fitting your fit.",
+    "aside": "Other bags → generic.<br>This one → yours."
+  },
+  "founder": {
+    "eyebrow": "Why it exists",
+    "paragraph1": "It was fascinating to me to go to a b-boy battle in Los Angeles and see all of the infants wearing colorful earmuffs being carried around by their parents. The next thought was — look at all of the amazing fathers hiphop has nurtured.",
+    "paragraph2": "But where are the specific tools for the hiphop parent? How are we as a culture celebrating this space where parenthood and hiphop meet? <em>Hip Hop Diaper Bag is my answer.</em>",
+    "attribution": "Marcus Gray / founder / Physics of Hiphop",
+    "hashtag": "#hiphopisnotasingleparent"
+  },
+  "cta": {
+    "eyebrow": "Available on Etsy / ships from Los Angeles",
+    "headline": {
+      "line1": "Carry the",
+      "line2": "culture"
+    },
+    "button": {
+      "label": "Cop it",
+      "price": "$55",
+      "priceWas": "was $65",
+      "url": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag?ref=shop_home_feat_1&sh_rv=1&frs=1&logging_key=fc332b089c4ce3378bb0119b2c46e5dbb8418cfa%3A4504765328"
+    },
+    "note": "4.8★ across 51 ratings / includes changing pad, insulated bottle sleeve, two stroller straps and a USB cable",
+    "image": {
+      "src": "assets/img/life-carry.webp",
+      "alt": "A parent carrying a baby on one shoulder while wearing the bag."
+    }
+  },
+  "instagram": {
+    "eyebrow": "The feed",
+    "handle": "@hiphopdiaperbag",
+    "profileUrl": "https://www.instagram.com/hiphopdiaperbag/",
+    "subline": "Carry the culture / tag us and we'll repost you",
+    "followLabel": "Follow ↗",
+    "tiles": [
+      {
+        "src": "assets/img/gram-1.webp",
+        "alt": "Instagram post: wearing the bag on a sunlit street, captioned finally, baby gear that fits the culture, with callouts for 15 pockets and insulated."
+      },
+      {
+        "src": "assets/img/gram-2.webp",
+        "alt": "Instagram post: a father carrying his baby down a lit tunnel with the bag on his back. Carry the culture, streetwear style, 15 pockets."
+      },
+      {
+        "src": "assets/img/gram-3.webp",
+        "alt": "Instagram post: a five star review calling it the ultimate Father's Day gift that matches his kicks, not a nursery. Only $55."
+      },
+      {
+        "src": "assets/img/gram-4.webp",
+        "alt": "Instagram post: the bag in studio with its changing pad and insulated bottle sleeve. Carry the culture, $55."
+      },
+      {
+        "src": "assets/img/gram-5.webp",
+        "alt": "Instagram post: Diaper Bags. Reimagined. The bag set against generic baby gear, $55."
+      },
+      {
+        "src": "assets/img/gram-6.webp",
+        "alt": "Instagram post: a grid of hip hop references with the bag, captioned Incoming Drop, now $55."
+      }
+    ],
+    "liveFeed": {
+      "_how": "Leave enabled false to show the curated tiles below. To mirror the real account, connect Instagram once at a widget service that holds the token for you (Behold, SnapWidget, LightWidget) or run your own Cloudflare Worker, then paste its JSON endpoint here and set enabled to true. Never paste an access token into this file - it is published.",
+      "enabled": false,
+      "endpoint": "",
+      "limit": 6
+    }
+  },
+  "footer": {
+    "line": "Physics of Hiphop / Los Angeles / hiphopisnotasingleparent",
+    "etsyLinkLabel": "Get yours ↗",
+    "etsyLinkUrl": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag?ref=shop_home_feat_1&sh_rv=1&frs=1&logging_key=fc332b089c4ce3378bb0119b2c46e5dbb8418cfa%3A4504765328"
   }
- },
- "featureStrip": {
-  "items": [
-   {
-    "figure": "15",
-    "label": "pockets & USB port"
-   },
-   {
-    "figure": "3",
-    "label": "insulated bottle holders"
-   },
-   {
-    "figure": "H₂O",
-    "label": "water resistant"
-   },
-   {
-    "figure": "2",
-    "label": "stroller straps"
-   },
-   {
-    "figure": "1",
-    "label": "wipe dispenser"
-   }
-  ]
- },
- "spec": {
-  "eyebrow": "Storage / fifteen",
-  "headline": {
-   "line1": "Everything",
-   "line2": "has a home."
-  },
-  "image": {
-   "src": "assets/img/in-the-box.webp",
-   "alt": "The bag with its insulated bottle sleeve, two stroller straps and USB cable."
-  },
-  "items": [
-   "<b>Three</b> insulated bottle holders, inside the main compartment.",
-   "<b>Two</b> side pockets, one of which dispenses wipes through a slot.",
-   "<b>Two</b> small slots for the things you lose — keys, a pacifier, a card.",
-   "<b>Two</b> inner side pockets.",
-   "<b>Two</b> medium slots.",
-   "<b>One</b> large front pocket under the snap flap.",
-   "<b>One</b> large mesh pocket.",
-   "<b>One</b> medium zipped inner pocket.",
-   "<b>One</b> hidden pocket. You'll find it.",
-   "<b>Fifteen.</b> Plus a top that opens wide enough to see the bottom."
-  ]
- },
- "evidence": {
-  "rain": {
-   "image": {
-    "src": "assets/img/life-neworleans.webp",
-    "alt": "Someone wearing the bag on a rain-wet New Orleans street."
-   },
-   "quote": "Not only is it water resistant — tested in the New Orleans rain — it allows for a lot to be packed for the people on the go.",
-   "attribution": "MSM / verified purchase / 5★"
-  },
-  "usb": {
-   "image": {
-    "src": "assets/img/detail-usb.webp",
-    "alt": "A power bank inserted into the bag's USB pass-through pocket."
-   },
-   "quote": "Good insulation for maintaining bottle temps, and it even comes with a port for you to charge your phone — you just need a portable battery charger, not included.",
-   "attribution": "A.E. / verified purchase / 5★"
-  },
-  "crown": {
-   "image": {
-    "src": "assets/img/detail-crown.webp",
-    "alt": "Macro of the debossed tan leather crown patch on the graffiti canvas."
-   },
-   "quote": "",
-   "attribution": "The mark, debossed into tan leather"
-  },
-  "sand": {
-   "image": {
-    "src": "assets/img/life-sand.webp",
-    "alt": "The bag on sand, close on the snap flap and leather tab."
-   },
-   "quote": "It definitely serves as a catalyst for discussion anywhere I go.",
-   "attribution": "MSM / verified purchase"
-  }
- },
- "drop": {
-  "eyebrow": "Incoming drop / now",
-  "title": "HipHop Diaper Bag wants to share the culture.",
-  "body": "Fifteen pockets of pure function with streetwear DNA. Now $55, was $65.",
-  "passButtonLabel": "Pass",
-  "buyButtonLabel": "Cop now",
-  "buyButtonUrl": "https://www.etsy.com/shop/OgHipHopDiaperBag?ref=anchored_listing",
-  "passedMessage": "Respect. It'll be here when the stroller stops fitting your fit.",
-  "aside": "Other bags → generic.<br>This one → yours."
- },
- "founder": {
-  "eyebrow": "Why it exists",
-  "paragraph1": "It was fascinating to me to go to a b-boy battle in Los Angeles and see all of the infants wearing colorful earmuffs being carried around by their parents. The next thought was — look at all of the amazing fathers hiphop has nurtured.",
-  "paragraph2": "But where are the specific tools for the hiphop parent? How are we as a culture celebrating this space where parenthood and hiphop meet? <em>Hip Hop Diaper Bag is my answer.</em>",
-  "attribution": "Marcus Gray / founder / Physics of Hiphop",
-  "hashtag": "#hiphopisnotasingleparent"
- },
- "cta": {
-  "eyebrow": "Available on Etsy / ships from Los Angeles",
-  "headline": {
-   "line1": "Carry the",
-   "line2": "culture"
-  },
-  "button": {
-   "label": "Cop it",
-   "price": "$55",
-   "priceWas": "was $65",
-   "url": "https://www.etsy.com/shop/OgHipHopDiaperBag?ref=anchored_listing"
-  },
-  "note": "4.8★ across 51 ratings / includes changing pad, insulated bottle sleeve, two stroller straps and a USB cable",
-  "image": {
-   "src": "assets/img/life-carry.webp",
-   "alt": "A parent carrying a baby on one shoulder while wearing the bag."
-  }
- },
- "instagram": {
-  "eyebrow": "The feed",
-  "handle": "@hiphopdiaperbag",
-  "profileUrl": "https://www.instagram.com/hiphopdiaperbag/",
-  "subline": "Carry the culture / tag us and we'll repost you",
-  "followLabel": "Follow ↗",
-  "tiles": [
-   {
-    "src": "assets/img/gram-1.webp",
-    "alt": "Instagram post: wearing the bag on a sunlit street, captioned finally, baby gear that fits the culture, with callouts for 15 pockets and insulated."
-   },
-   {
-    "src": "assets/img/gram-2.webp",
-    "alt": "Instagram post: a father carrying his baby down a lit tunnel with the bag on his back. Carry the culture, streetwear style, 15 pockets."
-   },
-   {
-    "src": "assets/img/gram-3.webp",
-    "alt": "Instagram post: a five star review calling it the ultimate Father's Day gift that matches his kicks, not a nursery. Only $55."
-   },
-   {
-    "src": "assets/img/gram-4.webp",
-    "alt": "Instagram post: the bag in studio with its changing pad and insulated bottle sleeve. Carry the culture, $55."
-   },
-   {
-    "src": "assets/img/gram-5.webp",
-    "alt": "Instagram post: Diaper Bags. Reimagined. The bag set against generic baby gear, $55."
-   },
-   {
-    "src": "assets/img/gram-6.webp",
-    "alt": "Instagram post: a grid of hip hop references with the bag, captioned Incoming Drop, now $55."
-   }
-  ],
-  "liveFeed": {
-   "_how": "Leave enabled false to show the curated tiles below. To mirror the real account, connect Instagram once at a widget service that holds the token for you (Behold, SnapWidget, LightWidget) or run your own Cloudflare Worker, then paste its JSON endpoint here and set enabled to true. Never paste an access token into this file - it is published.",
-   "enabled": false,
-   "endpoint": "",
-   "limit": 6
-  }
- },
- "footer": {
-  "line": "Physics of Hiphop / Los Angeles / hiphopisnotasingleparent",
-  "etsyLinkLabel": "Get yours ↗",
-  "etsyLinkUrl": "https://www.etsy.com/shop/OgHipHopDiaperBag?ref=anchored_listing"
- }
 }
