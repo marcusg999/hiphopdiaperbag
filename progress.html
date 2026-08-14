@@ -105,7 +105,10 @@
       <tr><td>Colour</td><td><span class="pill s-done">Locked</span></td><td>Seven values, one accent. The print is the loudest thing on the page by design.</td></tr>
       <tr><td>Layout</td><td><span class="pill s-done">Built</span></td><td>Broken grid, nothing centred, one bleed per section.</td></tr>
       <tr><td>Mobile</td><td><span class="pill s-live">Unjudged</span></td><td>Built and rendering; not yet compared against the bar.</td></tr>
-      <tr><td>CTA</td><td><span class="pill s-done">Built</span></td><td>Four routes, all to the Etsy listing.</td></tr>
+      <tr><td>CTA</td><td><span class="pill s-done">Built</span></td><td>Filled orange <b>BUY NOW &mdash; $55</b> in the hero, &ldquo;Get yours&rdquo; in the bar and footer, plus the drop card. Six routes, all to Etsy.</td></tr>
+      <tr><td>The drop</td><td><span class="pill s-done">Built</span></td><td>Your own notification card, made answerable. <b>Pass</b> gets a reply instead of a dead end.</td></tr>
+      <tr><td>Instagram</td><td><span class="pill s-done">Built</span></td><td>@hiphopdiaperbag, six-up grid of the real photography, follow route. <b>Curated, not live</b> &mdash; the API needs a token and their servers block this egress.</td></tr>
+      <tr><td>/admin</td><td><span class="pill s-live">Building</span></td><td>content.json + a form editor, no database. Export the file, or publish straight to GitHub with a token you paste.</td></tr>
       <tr><td>Blind critique</td><td><span class="pill s-wait">Blocked</span></td><td><b>The gate has not been run.</b> Every critic subagent was killed by the account session limit. Nothing here has beaten the bar yet.</td></tr>
     </tbody>
   </table>
@@ -127,7 +130,9 @@
     <span class="t">02:30</span> &nbsp;Matte fought back three rounds: white shadow smear, then a combed outline where the print's white tags touch the white backdrop, then a halo of lit backdrop. Fixed by border connectivity + a wide closing + eroding back inside the true edge.<br>
     <span class="t">03:10</span> &nbsp;Page live locally. Beam, plinth and product reading as a vitrine.<br>
     <span class="t">06:20</span> &nbsp;Hero rewritten to <b>CARRY THE CULTURE</b> in heavy condensed uppercase, matching the campaign grid. The grid also settled the price the research could not: <b>$55, was $65</b>.<br>
-    <span class="t">06:22</span> &nbsp;Merged to main. Pages workflow ran and <b style="color:var(--hazard)">failed at &ldquo;Configure Pages&rdquo;</b> &mdash; the repo has not got Pages switched on yet, and neither the workflow token nor this session is permitted to switch it on.
+    <span class="t">06:22</span> &nbsp;Merged to main. Pages workflow ran and <b style="color:var(--hazard)">failed at &ldquo;Configure Pages&rdquo;</b> &mdash; the repo has not got Pages switched on yet, and neither the workflow token nor this session is permitted to switch it on.<br>
+    <span class="t">06:45</span> &nbsp;<b>The holes in the rotation were a flood-fill leak.</b> Where the print's white tags reach the silhouette edge they touch the white backdrop through a channel a pixel or two wide; the fill poured through and hollowed the bag out. Sealed it by eroding the backdrop before labelling it. <b>Zero interior holes across all 72 frames</b>, checked by a regression script rather than by eye.<br>
+    <span class="t">06:52</span> &nbsp;BUY NOW, &ldquo;Get yours&rdquo;, the drop card and the feed are in and pushed to main.
   </p>
 
   <p class="foot"><b style="color:var(--hazard)">Blocked on one switch:</b> Settings &rarr; Pages &rarr; Source &rarr; GitHub Actions.<br>
