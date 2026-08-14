@@ -10,7 +10,7 @@
 
   "topbar": {
     "makerLine": "Physics of Hiphop / Los Angeles",
-    "etsyLinkLabel": "Etsy  ↗",
+    "etsyLinkLabel": "Get yours  ↗",
     "etsyLinkUrl": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag"
   },
 
@@ -22,6 +22,13 @@
       "line3": "culture"
     },
     "lede": "Not your generic baby gear. Fifteen pockets, three of them insulated, a USB pass-through and stroller straps — wrapped in a graffiti canvas that runs off the edge of every panel, so <em>no two bags are cut the same.</em>",
+    "buyButton": {
+      "label": "Buy now",
+      "price": "$55",
+      "priceWas": "$65",
+      "url": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag"
+    },
+    "buyNote": "Ships from Los Angeles / 4.8★ · 51 ratings",
     "dragHint": "Drag to turn",
     "handButtonLabel": "Turn it with your hand",
     "orbitAltText": "The Hip Hop Diaper Bag, rotating. Drag to turn it.",
@@ -119,6 +126,17 @@
     }
   },
 
+  "drop": {
+    "eyebrow": "Incoming drop / now",
+    "title": "HipHop Diaper Bag wants to share the culture.",
+    "body": "Fifteen pockets of pure function with streetwear DNA. Now $55, was $65.",
+    "passButtonLabel": "Pass",
+    "buyButtonLabel": "Cop now",
+    "buyButtonUrl": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag",
+    "passedMessage": "Respect. It'll be here when the stroller stops fitting your fit.",
+    "aside": "Other bags → generic.<br>This one → yours."
+  },
+
   "founder": {
     "eyebrow": "Why it exists",
     "paragraph1": "It was fascinating to me to go to a b-boy battle in Los Angeles and see all of the infants wearing colorful earmuffs being carried around by their parents. The next thought was — look at all of the amazing fathers hiphop has nurtured.",
@@ -146,9 +164,25 @@
     }
   },
 
+  "instagram": {
+    "eyebrow": "The feed",
+    "handle": "@hiphopdiaperbag",
+    "profileUrl": "https://www.instagram.com/hiphopdiaperbag/",
+    "subline": "Carry the culture / tag us and we'll repost you",
+    "followLabel": "Follow ↗",
+    "tiles": [
+      { "src": "assets/img/life-gallery.webp",    "alt": "A father wearing the bag in a gallery." },
+      { "src": "assets/img/life-neworleans.webp", "alt": "Wearing the bag on a wet New Orleans street." },
+      { "src": "assets/img/life-sand.webp",       "alt": "The bag on sand, close on the snap flap." },
+      { "src": "assets/img/life-carry.webp",      "alt": "A parent carrying a baby while wearing the bag." },
+      { "src": "assets/img/detail-crown.webp",    "alt": "The debossed leather crown patch." },
+      { "src": "assets/img/life-grass.webp",      "alt": "The bag on grass, shot from above." }
+    ]
+  },
+
   "footer": {
     "line": "Physics of Hiphop / Los Angeles / hiphopisnotasingleparent",
-    "etsyLinkLabel": "Etsy ↗",
+    "etsyLinkLabel": "Get yours ↗",
     "etsyLinkUrl": "https://www.etsy.com/listing/4504765328/hip-hop-diaper-bag"
   }
 }

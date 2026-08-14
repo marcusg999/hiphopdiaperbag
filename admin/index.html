@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Back office — Hip Hop Diaper Bag</title>
 <meta name="theme-color" content="#0A0A0B">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -48,6 +49,7 @@
         <code>&lt;br&gt;</code>. Nothing else is treated as markup. In the small
         uppercase lines, a slash <code>/</code> becomes the grey divider.
       </p>
+      <div class="metafields" id="metafields"></div>
     </div>
 
     <div id="form"></div>
@@ -68,7 +70,7 @@
           No images changed.
         </p>
         <div class="row">
-          <button type="button" id="btn-export-json" class="primary">Download content.json</button>
+          <button type="button" id="btn-export-json" class="accent">Download content.json</button>
           <button type="button" id="btn-export-images">Download changed images</button>
         </div>
         <div class="log" id="export-log" role="status" aria-live="polite"></div>
@@ -105,7 +107,7 @@
         <input type="password" id="gh-token" autocomplete="off" spellcheck="false"
                placeholder="github_pat_…">
         <div class="row">
-          <button type="button" id="btn-publish" class="primary">Publish to main</button>
+          <button type="button" id="btn-publish" class="accent">Publish to main</button>
           <button type="button" id="btn-forget">Forget token</button>
         </div>
         <div class="log" id="publish-log" role="status" aria-live="polite"></div>

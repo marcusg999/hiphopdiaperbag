@@ -135,6 +135,11 @@ button.primary {
   font-weight: 700;
 }
 button.primary:hover { background: var(--hazard-deep); border-color: var(--hazard-deep); color: var(--paper); }
+
+/* one filled hazard button per screen — everything else that leads borrows
+   the colour as an outline only */
+button.accent { border-color: var(--hazard-deep); color: var(--hazard); }
+button.accent:hover { border-color: var(--hazard); color: var(--void); background: var(--hazard); }
 button.tiny { padding: 6px 10px; }
 
 /* ---------------------------------------------------------------- shell */
@@ -171,12 +176,14 @@ button.tiny { padding: 6px 10px; }
 .rail a:hover { color: var(--paper); border-left-color: var(--hazard); }
 .rail .count { color: var(--rule-lit); }
 
-.sheet { padding-top: 40px; min-width: 0; }
+.sheet { padding-top: 40px; min-width: 0; max-width: 1080px; }
 
 .intro { max-width: 62ch; margin: 0 0 56px; }
+.metafields { margin-top: 26px; border-top: 1px solid var(--rule); }
+.metafields .field { grid-template-columns: minmax(140px, 0.42fr) 120px; border-bottom: 0; }
 .intro p { color: var(--crete); font-size: 14px; }
 .intro strong { color: var(--dust); font-weight: 600; }
-.intro code {
+.intro p code {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--paper);
@@ -194,10 +201,10 @@ button.tiny { padding: 6px 10px; }
 }
 .sec__h h2 {
   font-family: var(--sans);
-  font-size: clamp(28px, 3.4vw, 44px);
-  font-weight: 200;
-  font-stretch: 112%;
-  letter-spacing: -0.02em;
+  font-size: clamp(26px, 2.6vw, 36px);
+  font-weight: 800;
+  font-stretch: 76%;
+  letter-spacing: -0.015em;
   color: var(--paper);
   margin: 0;
   line-height: 1;
@@ -368,5 +375,10 @@ input[type="file"] { display: none; }
   .rail { position: static; border-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 18px; }
   .rail ol { columns: 2; }
   .field { grid-template-columns: 1fr; }
-  .bar { flex-wrap: wrap; align-items: flex-start; }
+  .bar { position: static; flex-wrap: wrap; align-items: flex-start; gap: 14px; }
+  .bar__state { flex: 1 0 100%; }
+  .bar__actions { width: 100%; }
+  .bar__actions button { flex: 1 1 auto; }
+  .rail { top: 0; }
+  .metafields .field { grid-template-columns: 1fr; }
 }

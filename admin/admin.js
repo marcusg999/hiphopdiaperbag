@@ -72,12 +72,32 @@ const singular = (s) => s.replace(/ies$/, 'y').replace(/s$/, '');
 function labelFor(segs) {
   const n = segs.length;
   const last = segs[n - 1];
+  if (LABEL_ALIASES[last]) return LABEL_ALIASES[last];
   if (isIndex(last)) return `${singular(humanize(segs[n - 2]))} ${Number(last) + 1}`;
   if (n > 2 && isIndex(segs[n - 2])) {
     return `${singular(humanize(segs[n - 3]))} ${Number(segs[n - 2]) + 1} — ${humanize(last).toLowerCase()}`;
   }
   return humanize(last);
 }
+
+const SECTION_NAMES = {
+  seo: 'SEO',
+  topbar: 'Top bar',
+  wallLabel: 'Wall label',
+  pullQuote: 'Pull quote',
+  featureStrip: 'Feature strip',
+  spec: 'Spec column',
+  drop: 'The drop card',
+  cta: 'The buy block',
+  instagram: 'Instagram',
+};
+
+const LABEL_ALIASES = {
+  src: 'Image',
+  alt: 'Alt text',
+  url: 'Link',
+  caption: 'Caption',
+};
 
 const SECTION_NOTES = {
   seo: 'Browser tab and search-result text. Not visible on the page itself.',
@@ -88,7 +108,9 @@ const SECTION_NOTES = {
   featureStrip: 'The row of numbers under the quote.',
   spec: 'The pinned column: heading, photo, and the fifteen-pocket list.',
   evidence: 'The four review figures — photo, quote, who said it.',
+  drop: 'The notification card — the one you can dismiss.',
   founder: 'Why it exists, in the founder\'s words.',
+  instagram: 'The feed strip: handle, six tiles, follow link.',
   cta: 'The buy block at the bottom.',
   footer: 'The last line on the page.',
 };
@@ -327,21 +349,33 @@ function renderInto(container, node, segs) {
 function buildForm() {
   const form = $('#form');
   const rail = $('#rail');
+  const meta = $('#metafields');
   form.textContent = '';
   rail.textContent = '';
+  meta.textContent = '';
 
   const keys = Object.keys(doc).filter((k) => k !== '_readme');
   let n = 0;
 
   for (const key of keys) {
     const value = doc[key];
+
+    // top-level scalars (version) are document bookkeeping, not page copy
+    if (value === null || typeof value !== 'object') {
+      meta.append(textField(key, [key], value));
+      continue;
+    }
+
     const id = `sec-${key}`;
     const sec = el('section', 'sec');
     sec.id = id;
 
     n += 1;
     const head = el('div', 'sec__h');
-    head.append(el('p', 'placard', String(n).padStart(2, '0')), el('h2', null, humanize(key)));
+    head.append(
+      el('p', 'placard', String(n).padStart(2, '0')),
+      el('h2', null, SECTION_NAMES[key] || humanize(key)),
+    );
     sec.append(head);
 
     if (SECTION_NOTES[key]) {
@@ -355,7 +389,7 @@ function buildForm() {
     form.append(sec);
 
     const li = el('li');
-    const a = el('a', null, humanize(key));
+    const a = el('a', null, SECTION_NAMES[key] || humanize(key));
     a.href = `#${id}`;
     const count = el('span', 'count', `  ${sec.querySelectorAll('.field').length}`);
     a.append(count);

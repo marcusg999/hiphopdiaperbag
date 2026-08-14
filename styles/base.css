@@ -141,8 +141,16 @@ main, .topbar, .foot { position: relative; z-index: 2; }
 .topbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
   padding: 18px var(--edge);
   mix-blend-mode: difference;
+}
+.topbar .placard { white-space: nowrap; }
+/* On a narrow viewport the two ends of the bar collide and the buy link gets
+   clipped off the right edge. The city is the expendable half. */
+@media (max-width: 560px) {
+  .topbar__city { display: none; }
+  .topbar { padding-inline: clamp(14px, 4vw, 20px); }
 }
 
 .foot {
