@@ -98,14 +98,15 @@
   <table>
     <thead><tr><th>Piece</th><th>Status</th><th>Where it stands</th></tr></thead>
     <tbody>
-      <tr><td>360 asset</td><td><span class="pill s-live">Rendering</span></td><td>Clean front elevation generated from the real 2500&times;2560 studio frame. Two 10s 1080p turntables rendering with start&nbsp;=&nbsp;end frame to force a true loop. Next: ffmpeg &rarr; 72-frame sequence.</td></tr>
-      <tr><td>Hero interaction</td><td><span class="pill s-wait">Queued</span></td><td>MediaPipe Hands &rarr; pinch to grab, wrist angle drives frame index, release throws it on inertia. Pointer and touch fallbacks.</td></tr>
-      <tr><td>Motion</td><td><span class="pill s-wait">Queued</span></td><td>One slow GLSL concrete-and-light field, always moving, never visibly repeating.</td></tr>
-      <tr><td>Type</td><td><span class="pill s-done">Ready</span></td><td>Archivo variable + JetBrains Mono, self-hosted latin subsets, 130KB total.</td></tr>
+      <tr><td>360 asset</td><td><span class="pill s-done">Built</span></td><td>72 frames, matted off the studio white and linearised by <em>angle</em> rather than time, so equal drag gives equal rotation. Front, both sides and the real strapped back.</td></tr>
+      <tr><td>Hero interaction</td><td><span class="pill s-done">Built</span></td><td>Pointer, touch, scroll and hand all drive one orbit object. MediaPipe lazy-loads behind a click so the 7.8MB model never touches first load.</td></tr>
+      <tr><td>Motion</td><td><span class="pill s-live">Unverified</span></td><td>Shader field and particle field are written and running; the agent that was to measure them died before it could.</td></tr>
+      <tr><td>Type</td><td><span class="pill s-done">Built</span></td><td>Archivo variable + JetBrains Mono, self-hosted, 130KB. Headlines animate weight <em>and</em> width, never opacity alone.</td></tr>
       <tr><td>Colour</td><td><span class="pill s-done">Locked</span></td><td>Seven values, one accent. The print is the loudest thing on the page by design.</td></tr>
-      <tr><td>Layout</td><td><span class="pill s-wait">Queued</span></td><td>12&#8209;col broken grid; every section bleeds exactly one element past a viewport edge.</td></tr>
-      <tr><td>Mobile</td><td><span class="pill s-wait">Queued</span></td><td>Touch-drag orbit; the shader field degrades before the product does.</td></tr>
-      <tr><td>CTA</td><td><span class="pill s-wait">Queued</span></td><td>Every route lands on the Etsy listing.</td></tr>
+      <tr><td>Layout</td><td><span class="pill s-done">Built</span></td><td>Broken grid, nothing centred, one bleed per section.</td></tr>
+      <tr><td>Mobile</td><td><span class="pill s-live">Unjudged</span></td><td>Built and rendering; not yet compared against the bar.</td></tr>
+      <tr><td>CTA</td><td><span class="pill s-done">Built</span></td><td>Four routes, all to the Etsy listing.</td></tr>
+      <tr><td>Blind critique</td><td><span class="pill s-wait">Blocked</span></td><td><b>The gate has not been run.</b> Every critic subagent was killed by the account session limit. Nothing here has beaten the bar yet.</td></tr>
     </tbody>
   </table>
   </div>
@@ -120,10 +121,15 @@
     <span class="t">01:37</span> &nbsp;Etsy and Instagram hard-block this IP. Found the brand's own dead Wix site, then the real listing elsewhere.<br>
     <span class="t">01:41</span> &nbsp;Recovered real assets: the 2500&times;2560 studio frame, the worn back view showing the <b>crown leather patch</b>, the USB power-bank detail, and a dad wearing it in a concrete-floored art gallery. The roll picked a direction the brand already lives in.<br>
     <span class="t">01:44</span> &nbsp;Contract locked. Direction #3 of 7.<br>
-    <span class="t">01:49</span> &nbsp;Turntables rendering.
+    <span class="t">01:49</span> &nbsp;Turntables rendering.<br>
+    <span class="t">01:56</span> &nbsp;Research came back with the finding that matters most: <b>the founder is Marcus Gray</b>. This is your own brand, and a 2019 interview in your own words beats any listing copy. Also: it is <b>15</b> pockets, itemised &mdash; not the 13 the press repeated.<br>
+    <span class="t">02:02</span> &nbsp;All four subagents killed mid-flight by the account session limit. Carried the build in the main thread.<br>
+    <span class="t">02:30</span> &nbsp;Matte fought back three rounds: white shadow smear, then a combed outline where the print's white tags touch the white backdrop, then a halo of lit backdrop. Fixed by border connectivity + a wide closing + eroding back inside the true edge.<br>
+    <span class="t">03:10</span> &nbsp;Page live. Beam, plinth and product reading as a vitrine.
   </p>
 
-  <p class="foot">Bar: activetheory.net/work &mdash; compared blind, side by side, desktop and mobile.<br>
-  Loop exits when the critic picks ours without knowing which is which.</p>
+  <p class="foot">Bar: activetheory.net/work &mdash; captured, desktop and mobile, and waiting.<br>
+  <b style="color:var(--hazard)">The loop has not been run.</b> The critics were killed before they could judge anything.<br>
+  Nothing on this page has beaten the bar yet, and it should not be called finished until it has.</p>
 
 </div>
