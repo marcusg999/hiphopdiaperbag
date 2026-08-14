@@ -174,12 +174,14 @@ function onScroll() {
       specCount.textContent = String(active + 1).padStart(2, '0');
     }
 
-    // scrubbing out of the hero turns the bag backwards — the scroll and the
-    // hand drive the same object, which is the point of the pinned sequence
+    // Scrubbing out of the hero turns the bag — scroll, drag and hand all drive
+    // the same object. This adds to the free rotation rather than replacing it,
+    // so a scroll no longer snaps the idle turntable back to where it started.
+    // A full scroll past the hero is a full revolution.
     if (!orbit.isDragging && !hands.running) {
       const hr = heroSection.getBoundingClientRect();
       const past = Math.min(Math.max(-hr.top / innerHeight, 0), 1.6);
-      orbit.setAngle(past * -260);
+      orbit.setScrollAngle(past * -360);
     }
 
     // the field dims as the page leaves the vitrine

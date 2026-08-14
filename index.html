@@ -23,6 +23,10 @@
 
 <body>
 
+<!-- The print itself, as the page's ground. Sits under the shader field so the
+     light rakes across it rather than over a flat colour. -->
+<div class="ground" aria-hidden="true"></div>
+
 <!-- The motion signature: one slow concrete-and-light field, always moving. -->
 <canvas id="field" class="bg-layer" aria-hidden="true"></canvas>
 <canvas id="motes" class="bg-layer" aria-hidden="true"></canvas>

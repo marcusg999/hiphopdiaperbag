@@ -25,7 +25,8 @@ export function createOrbit(canvas, opts = {}) {
   const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
 
   // ---- state -------------------------------------------------------------
-  let angle = 0;            // degrees, unwrapped
+  let angle = 0;            // free rotation: idle drift, drag and inertia
+  let scrollAngle = 0;      // scroll's own contribution, kept separate
   let velocity = 0;         // degrees per frame
   let dragging = false;
   let drawnIndex = -1;
@@ -35,7 +36,12 @@ export function createOrbit(canvas, opts = {}) {
   let cssW = 0, cssH = 0;
 
   const FRICTION = 0.94;    // inertia decay once released
-  const IDLE_SPIN = opts.idleSpin ?? 0.055; // the piece is never quite still
+  // Degrees per SECOND, not per frame. A full revolution in 22s. The old value
+  // was per-frame and took 109 seconds at 60fps — and far longer on anything
+  // slower, because a per-frame drift silently becomes a function of the
+  // device's frame rate. Driving it from elapsed time makes the turntable turn
+  // at the same speed on a phone as on a workstation.
+  const IDLE_DPS = opts.idleDegreesPerSecond ?? (360 / 22);
   let idleAllowed = true;
 
   const listeners = { change: [] };
@@ -88,6 +94,8 @@ export function createOrbit(canvas, opts = {}) {
     return -1;
   }
 
+  function totalAngle() { return angle + scrollAngle; }
+
   function indexFor(deg) {
     // The render turns clockwise; dragging right should turn the bag right.
     const t = ((deg % 360) + 360) % 360;
@@ -106,7 +114,7 @@ export function createOrbit(canvas, opts = {}) {
   }
 
   function draw(force) {
-    const want = indexFor(angle);
+    const want = indexFor(totalAngle());
     if (!force && want === drawnIndex) return;
     const i = nearestLoaded(want);
     if (i < 0) return;
@@ -122,15 +130,20 @@ export function createOrbit(canvas, opts = {}) {
   }
 
   // ---- loop --------------------------------------------------------------
-  function tick() {
+  let lastT = 0;
+  function tick(now) {
     if (!running) return;
+    // Clamp the delta so a backgrounded tab or a long stall does not resume
+    // with the bag having spun through a random angle.
+    const dt = lastT ? Math.min((now - lastT) / 1000, 0.1) : 0;
+    lastT = now;
     if (!dragging) {
       if (Math.abs(velocity) > 0.004) {
         angle += velocity;
         velocity *= FRICTION;
       } else {
         velocity = 0;
-        if (idleAllowed) angle += IDLE_SPIN;
+        if (idleAllowed) angle += IDLE_DPS * dt;
       }
     }
     draw(false);
@@ -140,7 +153,7 @@ export function createOrbit(canvas, opts = {}) {
   // ---- api ---------------------------------------------------------------
   const api = {
     load,
-    start() { if (!running) { running = true; raf = requestAnimationFrame(tick); } },
+    start() { if (!running) { running = true; lastT = 0; raf = requestAnimationFrame(tick); } },
     stop() { running = false; cancelAnimationFrame(raf); },
     destroy() { api.stop(); frames.length = 0; },
     resize,
@@ -148,15 +161,20 @@ export function createOrbit(canvas, opts = {}) {
     grab() { dragging = true; velocity = 0; },
     /** deg: how far to turn right now. Called by pointer, touch and hand alike. */
     addAngle(deg) { angle += deg; velocity = deg; draw(false); },
-    setAngle(deg) { angle = deg; draw(false); },
+    /** Scroll's contribution, held apart from the free rotation so the two add
+     *  up instead of overwriting each other. Setting this used to clobber the
+     *  idle drift back to an absolute value on every scroll event, which is why
+     *  the bag could never complete a turn on its own. */
+    setScrollAngle(deg) { scrollAngle = deg; draw(false); },
+    setAngle(deg) { angle = deg; scrollAngle = 0; draw(false); },
     release(throwVelocity) {
       dragging = false;
       if (typeof throwVelocity === 'number') velocity = throwVelocity;
     },
     setIdle(v) { idleAllowed = !!v; },
 
-    get angle() { return ((angle % 360) + 360) % 360; },
-    get index() { return indexFor(angle); },
+    get angle() { return ((totalAngle() % 360) + 360) % 360; },
+    get index() { return indexFor(totalAngle()); },
     get progress() { return ready / count; },
     get isDragging() { return dragging; },
     on,

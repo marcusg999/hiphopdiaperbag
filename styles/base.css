@@ -33,6 +33,22 @@ img { height: auto; }
 
 a { color: inherit; text-decoration: none; }
 
+/* The graffiti ground. Used as ONE cover-sized layer rather than a repeating
+   tile, so there is no seam to hide, and held right down in opacity: the print
+   on the product has to stay the loudest thing on the page, and a background
+   that competes with it would flatten the whole vitrine. */
+.ground {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("../assets/img/graffiti-ground.webp") center / cover no-repeat;
+  opacity: .11;
+  filter: contrast(1.1);
+  mask-image: radial-gradient(ellipse 82% 70% at 50% 42%,
+              rgba(0,0,0,.35) 0%, rgba(0,0,0,.9) 55%, #000 100%);
+}
+
 /* ---- the two background canvases: the motion signature ---- */
 .bg-layer {
   position: fixed;

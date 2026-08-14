@@ -45,8 +45,6 @@
   display: grid;
   place-items: center;
   min-height: min(66svh, 660px);
-  /* contains the light cone, which is wider than this column on purpose */
-  overflow: clip;
 }
 
 /* The light cone falling on the plinth. Two parts: a wide soft wash that lifts
