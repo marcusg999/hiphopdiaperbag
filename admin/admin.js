@@ -158,9 +158,19 @@ function processImage(file) {
         const ctx = canvas.getContext('2d');
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, w, h);
+        // Some iOS Safari versions ignore the requested webp type and hand
+        // back a PNG instead, which for a 2000px photo is several megabytes.
+        // Detect that and re-encode as JPEG, which every browser supports and
+        // which lands around a tenth of the size.
         canvas.toBlob((blob) => {
           if (!blob) return reject(new Error('the browser refused to encode that image'));
-          resolve({ blob, width: w, height: h, from: [w0, h0] });
+          if (blob.type === 'image/webp') {
+            return resolve({ blob, width: w, height: h, from: [w0, h0] });
+          }
+          canvas.toBlob((jpg) => {
+            const out = (jpg && jpg.type === 'image/jpeg' && jpg.size < blob.size) ? jpg : blob;
+            resolve({ blob: out, width: w, height: h, from: [w0, h0] });
+          }, 'image/jpeg', WEBP_QUALITY);
         }, 'image/webp', WEBP_QUALITY);
       };
       img.src = reader.result;
@@ -525,6 +535,11 @@ async function ghSha(path, token) {
   if (res.status === 404) return null;            // new file
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
+    if (res.status === 403) {
+      throw new Error(
+        `403 on ${path} — ${body.message || res.statusText}. The token cannot read `
+        + `this repo. Give it Contents: Read and write on ${REPO}.`);
+    }
     throw new Error(`${res.status} on ${path} — ${body.message || res.statusText}`);
   }
   const json = await res.json();
@@ -544,6 +559,14 @@ async function ghPut(path, contentB64, message, token) {
     }),
   });
   const body = await res.json().catch(() => ({}));
+  if (res.status === 403 || res.status === 404) {
+    throw new Error(
+      `${res.status} — ${body.message || res.statusText}. `
+      + 'This is the token, not the file. A fine-grained token needs '
+      + 'Repository access covering ' + REPO + ' AND Permissions → Repository '
+      + 'permissions → Contents set to "Read and write". A classic token needs '
+      + 'the full "repo" scope. Re-issue it, then paste the new one above.');
+  }
   if (!res.ok) throw new Error(`${res.status} — ${body.message || res.statusText}`);
   return { sha, commit: body.commit && body.commit.sha ? body.commit.sha.slice(0, 7) : '—' };
 }
