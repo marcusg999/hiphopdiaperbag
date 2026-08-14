@@ -43,10 +43,40 @@ a { color: inherit; text-decoration: none; }
   z-index: 0;
   pointer-events: none;
   background: url("../assets/img/graffiti-ground.webp") center / cover no-repeat;
-  opacity: .11;
-  filter: contrast(1.1);
-  mask-image: radial-gradient(ellipse 82% 70% at 50% 42%,
-              rgba(0,0,0,.35) 0%, rgba(0,0,0,.9) 55%, #000 100%);
+  /* No opacity dial. The stroke value is baked into the asset at #3E3E44 so the
+     contrast against text is a known quantity rather than something that drifts
+     every time this number is nudged. Legibility of a pattern comes from edge
+     contrast against its own ground, not from brightness. */
+  opacity: 1;
+  /* Ease it off at the very top and bottom so the fixed bar and the footer rule
+     do not have to fight it. */
+  mask-image: linear-gradient(to bottom,
+              transparent 0%, #000 9%, #000 92%, transparent 100%);
+
+  /* ABOVE the shader field, not below it. The field's WebGL context is created
+     with alpha:false, so it paints fully opaque — sitting underneath it, this
+     layer was invisible no matter what opacity it was given, which is why the
+     pattern read as "not legible". Screen blending puts it back on top while
+     still letting the field's moving light show through the strokes, which is
+     the effect the underneath placement was reaching for in the first place. */
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+/* Small and secondary text carries a soft halo of the page ground, so wherever
+   a glyph lands on top of a graffiti stroke it is still sitting on near-void.
+   Without this the 11px placards drop to 3.1:1 against a stroke, which fails
+   AA; with it they stay at the 11:1 they have over the bare background. The
+   display type is heavy enough not to need it. */
+.placard,
+.lede,
+.label__dl,
+.spec__list li,
+.ev figcaption,
+.why__q,
+.cta__note,
+.strip__list span {
+  text-shadow: 0 0 10px var(--void), 0 0 4px var(--void), 0 0 2px var(--void);
 }
 
 /* ---- the two background canvases: the motion signature ---- */
@@ -58,9 +88,9 @@ a { color: inherit; text-decoration: none; }
   z-index: 0;
   pointer-events: none;
 }
-#motes { z-index: 1; }
+#motes { z-index: 2; }
 
-main, .topbar, .foot { position: relative; z-index: 2; }
+main, .topbar, .foot { position: relative; z-index: 3; }
 
 /* ---- the placard voice: 11px mono, uppercase. The whole small end of the
    type system. There is deliberately nothing between this and the display. --- */

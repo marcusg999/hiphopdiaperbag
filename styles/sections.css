@@ -30,7 +30,10 @@
 .placard--eyebrow { margin-bottom: 20px; color: var(--hazard); }
 .hero h1 { margin-bottom: 26px; }
 .lede {
-  color: var(--crete);
+  /* Body colour rather than the secondary grey. Over a patterned ground the
+     grey measured 4.1:1, under the 4.5 AA floor; this is the sentence that has
+     to be read, so it gets the brighter ink. */
+  color: var(--dust);
   max-width: 38ch;
   font-size: clamp(.95rem, .9rem + .25vw, 1.1rem);
   line-height: 1.62;
