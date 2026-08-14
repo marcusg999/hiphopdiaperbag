@@ -15,6 +15,13 @@ import { createParticles } from './particles.js';
 import { createCursor } from './cursor.js';
 import { createOrbit, attachPointerControl } from './orbit.js';
 import { createHandControl } from './hands.js';
+import { applyContent } from './content.js';
+
+/* Content layer first. index.html ships the real copy as static markup, so this
+   is a patch over it, not a dependency of it — if content.json is missing or
+   malformed the page simply keeps the copy it was born with. Awaited before the
+   reveal observers attach so text never changes under a finished animation. */
+await applyContent().catch(() => ({ ok: false }));
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(pointer: fine)').matches;

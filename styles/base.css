@@ -7,6 +7,11 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* The clip has to be on the root, not just body. The page deliberately bleeds
+     elements past the viewport edge, and the hero's light cone is wider than a
+     phone; on mobile that widens the initial containing block rather than being
+     clipped, which is what pushed the fixed top bar off-screen. */
+  overflow-x: clip;
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -149,8 +154,11 @@ main, .topbar, .foot { position: relative; z-index: 2; }
 /* On a narrow viewport the two ends of the bar collide and the buy link gets
    clipped off the right edge. The city is the expendable half. */
 @media (max-width: 560px) {
-  .topbar__city { display: none; }
-  .topbar { padding-inline: clamp(14px, 4vw, 20px); }
+  /* Hide the whole maker line rather than an inner span: the content layer may
+     rebuild that line from JSON and would take any inner hook with it. The
+     brand name is in the page a screenful below; the buy link is not. */
+  .topbar > .placard:first-child { display: none; }
+  .topbar { padding-inline: clamp(14px, 4vw, 20px); justify-content: flex-end; }
 }
 
 .foot {

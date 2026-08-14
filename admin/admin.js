@@ -69,15 +69,23 @@ function humanize(key) {
 }
 const singular = (s) => s.replace(/ies$/, 'y').replace(/s$/, '');
 
+/** A label a human can read, given the path segments. The section name is
+    already the heading above, so segment 0 is dropped. */
 function labelFor(segs) {
   const n = segs.length;
   const last = segs[n - 1];
-  if (LABEL_ALIASES[last]) return LABEL_ALIASES[last];
-  if (isIndex(last)) return `${singular(humanize(segs[n - 2]))} ${Number(last) + 1}`;
-  if (n > 2 && isIndex(segs[n - 2])) {
-    return `${singular(humanize(segs[n - 3]))} ${Number(segs[n - 2]) + 1} — ${humanize(last).toLowerCase()}`;
+  const prev = segs[n - 2];
+  if (isIndex(last)) return `${singular(humanize(prev))} ${Number(last) + 1}`;
+
+  const base = LABEL_ALIASES[last] || humanize(last);
+  if (n <= 2) return base;
+  if (isIndex(prev)) {
+    return `${singular(humanize(segs[n - 3]))} ${Number(prev) + 1} — ${base.toLowerCase()}`;
   }
-  return humanize(last);
+  const mids = humanize(segs.slice(1, n - 1).filter((s) => !isIndex(s)).join(' '));
+  if (!mids) return base;
+  if (mids.toLowerCase().endsWith(base.toLowerCase())) return mids;
+  return `${mids} — ${base.toLowerCase()}`;
 }
 
 const SECTION_NAMES = {
