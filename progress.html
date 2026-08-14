@@ -1,0 +1,129 @@
+<title>Vitrine Build Log</title>
+<style>
+  :root{
+    --void:#0A0A0B; --slab:#16161A; --crete:#8E8B84; --dust:#C9C5BC;
+    --paper:#F4F2ED; --hazard:#FF4A00; --hazard-deep:#C43300;
+    --rule:#26262B;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  :root[data-theme="light"]{ --void:#EDEBE6; --slab:#FFFFFF; --crete:#6B6862; --dust:#2A2A2C; --paper:#0A0A0B; --rule:#D6D2CA; }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){ --void:#EDEBE6; --slab:#FFFFFF; --crete:#6B6862; --dust:#2A2A2C; --paper:#0A0A0B; --rule:#D6D2CA; }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--void); color:var(--dust);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      repeating-linear-gradient(90deg, color-mix(in srgb, var(--crete) 7%, transparent) 0 1px, transparent 1px 96px);
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:clamp(28px,6vw,72px) clamp(18px,5vw,56px) 120px}
+  .placard{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--crete)}
+  h1{
+    font-family:var(--sans); font-weight:900; font-stretch:118%;
+    font-size:clamp(2.4rem,7.5vw,5.6rem); line-height:.92; letter-spacing:-.025em;
+    color:var(--paper); margin:.35em 0 .1em; text-wrap:balance;
+  }
+  h1 em{font-style:normal; color:var(--hazard)}
+  .sub{max-width:56ch; color:var(--crete); font-size:clamp(.95rem,1.6vw,1.1rem)}
+  .rule{height:1px; background:var(--rule); margin:38px 0 30px; border:0}
+  h2{
+    font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--hazard); font-weight:500; margin:0 0 16px;
+  }
+  table{width:100%; border-collapse:collapse; font-size:14px}
+  th{
+    text-align:left; font-family:var(--mono); font-size:10px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--crete); font-weight:400;
+    padding:0 12px 9px 0; border-bottom:1px solid var(--rule); white-space:nowrap;
+  }
+  td{padding:13px 12px 13px 0; border-bottom:1px solid var(--rule); vertical-align:top}
+  td:first-child{color:var(--paper); font-weight:600; white-space:nowrap}
+  .tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .pill{
+    display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:.1em;
+    text-transform:uppercase; padding:3px 8px 2px; border:1px solid currentColor; white-space:nowrap;
+  }
+  .s-done{color:var(--hazard)}
+  .s-live{color:var(--paper)}
+  .s-wait{color:var(--crete); opacity:.75}
+  .grid{display:grid; gap:1px; background:var(--rule); border:1px solid var(--rule); grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+  .cell{background:var(--void); padding:18px 16px}
+  .cell .n{font-family:var(--sans); font-weight:800; font-size:clamp(1.6rem,4vw,2.4rem); color:var(--paper); line-height:1; letter-spacing:-.02em}
+  .cell .n.hz{color:var(--hazard)}
+  .cell .l{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--crete); margin-top:8px}
+  ul{padding-left:1.1em; margin:0}
+  li{margin:.42em 0}
+  li b{color:var(--paper); font-weight:600}
+  code{font-family:var(--mono); font-size:.86em; color:var(--paper); background:var(--slab); padding:1px 5px; border:1px solid var(--rule)}
+  .log{font-family:var(--mono); font-size:12.5px; line-height:1.75; color:var(--crete); margin:0}
+  .log b{color:var(--paper); font-weight:500}
+  .log .t{color:var(--hazard)}
+  .foot{margin-top:56px; color:var(--crete); font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
+  a{color:var(--hazard)}
+</style>
+
+<div class="wrap">
+
+  <p class="placard">Hip Hop Diaper Bag &nbsp;/&nbsp; Landing page &nbsp;/&nbsp; Build log</p>
+  <h1>VITRINE<br><em>build in progress</em></h1>
+  <p class="sub">
+    A raw-concrete gallery treating a graffiti diaper bag as an acquisition. The direction
+    was picked by a dice roll, not by preference. This page updates as the work does.
+  </p>
+
+  <hr class="rule">
+
+  <h2>The roll</h2>
+  <div class="grid">
+    <div class="cell"><div class="n hz">#3</div><div class="l">of 7 directions<br>&ldquo;Boutique vitrine&rdquo;</div></div>
+    <div class="cell"><div class="n">3</div><div class="l">advanced techniques<br>committed to</div></div>
+    <div class="cell"><div class="n">8</div><div class="l">pieces judged<br>separately &amp; blind</div></div>
+    <div class="cell"><div class="n">&ge;90</div><div class="l">Lighthouse perf<br>+ 60fps hero</div></div>
+  </div>
+
+  <p class="sub" style="margin-top:22px">
+    Seed <code>1786671644180394936</code>. Techniques: magnetic/warping cursor &middot; scroll
+    choreography &middot; a living particle field. Palette: concrete grey, safety orange, black.
+    Type: Archivo variable (weight <em>and</em> width animate) against 11px JetBrains Mono placards,
+    with nothing in between. Layout: broken asymmetric grid &mdash; nothing on the page is centred.
+  </p>
+
+  <hr class="rule">
+
+  <h2>Pieces &mdash; each gets a builder and a separate harsh critic</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Piece</th><th>Status</th><th>Where it stands</th></tr></thead>
+    <tbody>
+      <tr><td>360 asset</td><td><span class="pill s-live">Rendering</span></td><td>Clean front elevation generated from the real 2500&times;2560 studio frame. Two 10s 1080p turntables rendering with start&nbsp;=&nbsp;end frame to force a true loop. Next: ffmpeg &rarr; 72-frame sequence.</td></tr>
+      <tr><td>Hero interaction</td><td><span class="pill s-wait">Queued</span></td><td>MediaPipe Hands &rarr; pinch to grab, wrist angle drives frame index, release throws it on inertia. Pointer and touch fallbacks.</td></tr>
+      <tr><td>Motion</td><td><span class="pill s-wait">Queued</span></td><td>One slow GLSL concrete-and-light field, always moving, never visibly repeating.</td></tr>
+      <tr><td>Type</td><td><span class="pill s-done">Ready</span></td><td>Archivo variable + JetBrains Mono, self-hosted latin subsets, 130KB total.</td></tr>
+      <tr><td>Colour</td><td><span class="pill s-done">Locked</span></td><td>Seven values, one accent. The print is the loudest thing on the page by design.</td></tr>
+      <tr><td>Layout</td><td><span class="pill s-wait">Queued</span></td><td>12&#8209;col broken grid; every section bleeds exactly one element past a viewport edge.</td></tr>
+      <tr><td>Mobile</td><td><span class="pill s-wait">Queued</span></td><td>Touch-drag orbit; the shader field degrades before the product does.</td></tr>
+      <tr><td>CTA</td><td><span class="pill s-wait">Queued</span></td><td>Every route lands on the Etsy listing.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <hr class="rule">
+
+  <h2>Log</h2>
+  <p class="log">
+    <span class="t">01:21</span> &nbsp;Chromium could not reach any external host &mdash; <b>every</b> request reset.<br>
+    <span class="t">01:29</span> &nbsp;Traced it: the egress proxy resets jumbo post-quantum TLS ClientHellos (1791&nbsp;B). Capping TLS and disabling PQ/ECH shrinks it to 441&nbsp;B. Browser works.<br>
+    <span class="t">01:33</span> &nbsp;The bar was serving us its rejection page &mdash; it blocklists SwiftShader's WebGL renderer string. Spoofed it. Real Active Theory captured, desktop and mobile.<br>
+    <span class="t">01:37</span> &nbsp;Etsy and Instagram hard-block this IP. Found the brand's own dead Wix site, then the real listing elsewhere.<br>
+    <span class="t">01:41</span> &nbsp;Recovered real assets: the 2500&times;2560 studio frame, the worn back view showing the <b>crown leather patch</b>, the USB power-bank detail, and a dad wearing it in a concrete-floored art gallery. The roll picked a direction the brand already lives in.<br>
+    <span class="t">01:44</span> &nbsp;Contract locked. Direction #3 of 7.<br>
+    <span class="t">01:49</span> &nbsp;Turntables rendering.
+  </p>
+
+  <p class="foot">Bar: activetheory.net/work &mdash; compared blind, side by side, desktop and mobile.<br>
+  Loop exits when the critic picks ours without knowing which is which.</p>
+
+</div>
