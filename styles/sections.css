@@ -216,8 +216,13 @@ body.has-cursor .orbit { cursor: none; }
   text-transform: uppercase;
   line-height: 1.5;
 }
-.label__dl dt { color: var(--rule-lit); }
-.label__dl dd { margin: 0; color: var(--crete); }
+/* The label is the quiet half of the pair and the value is the loud half, but
+   both are content — a spec sheet whose labels cannot be read is a column of
+   unattributed values. Lighthouse measured the old dt at 1.6:1 and the blind
+   comparison independently called the list "broken rather than a reveal",
+   which is two different instruments agreeing. */
+.label__dl dt { color: var(--crete-dim); }
+.label__dl dd { margin: 0; color: var(--dust); }
 
 .scrollcue {
   grid-column: stage-end / full-end;

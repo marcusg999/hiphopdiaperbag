@@ -41,6 +41,15 @@
   --rule: #24242a;         /* hairlines, derived from slab */
   --rule-lit: #34343c;
 
+  /* The quietest colour text is allowed to be. A hairline and a label are not
+     the same job: --rule-lit is fine for a 1px stroke and measures 1.6:1 on the
+     void, which is nowhere near the 4.5:1 a 10px uppercase label needs. This
+     sits at 4.81:1 — still clearly subordinate to the values it labels at
+     --crete 5.82:1 and to body copy at --dust 11.49:1, so the hierarchy is
+     intact and it is legible. Anything quieter than this is decoration, and
+     decoration should not be carrying words. */
+  --crete-dim: #807d75;    /* 4.81:1 on --void — the floor for real text */
+
   /* ---- type ---- */
   --sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
