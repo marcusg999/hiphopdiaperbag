@@ -60,26 +60,46 @@ export function createOrbit(canvas, opts = {}) {
     });
   }
 
+  function pump(list) {
+    const CONC = 6;
+    let cursor = 0;
+    return Promise.all(Array.from({ length: CONC }, async () => {
+      while (cursor < list.length) {
+        await loadFrame(list[cursor++]);
+        emit('change', { ready, count });
+      }
+    }));
+  }
+
   /** Load frame 0 first so something is on screen, then fan out over the rest
    *  in an interleaved order — every 8th, then every 4th, and so on — so the
-   *  turntable becomes coarsely scrubbable long before it is complete. */
+   *  turntable becomes coarsely scrubbable long before it is complete.
+   *
+   *  That order is right but doing all of it during boot was not. Seventy-two
+   *  800px frames is roughly 180MB of bitmap decode, and running it inline cost
+   *  1.7s of blocked main thread in the window the browser needed to paint the
+   *  headline. So the sequence is split at its own natural seam: the coarse
+   *  ring — every eighth frame, nine views at 40° apart — is enough for a drag
+   *  or a scroll to turn the bag, and it is the only part that boots. The
+   *  in-betweens fill in on idle, and their real deadline is not first paint
+   *  but the moment someone drags far enough to see a step, which is much
+   *  later. Until then nearest() falls back to the closest loaded view, so a
+   *  half-loaded turntable is coarse rather than broken. */
   async function load() {
     await loadFrame(0);
     draw(true);
     emit('change', { ready, count });
+
     const order = [];
     for (let step = count >> 1; step >= 1; step >>= 1) {
       for (let i = step; i < count; i += step) if (!order.includes(i)) order.push(i);
     }
-    const CONC = 6;
-    let cursor = 0;
-    await Promise.all(Array.from({ length: CONC }, async () => {
-      while (cursor < order.length) {
-        const i = order[cursor++];
-        await loadFrame(i);
-        emit('change', { ready, count });
-      }
-    }));
+    const COARSE = 8;
+    await pump(order.filter((i) => i % COARSE === 0));
+
+    const rest = () => pump(order.filter((i) => i % COARSE !== 0));
+    if (typeof requestIdleCallback === 'function') requestIdleCallback(rest, { timeout: 2500 });
+    else setTimeout(rest, 300);
   }
 
   // ---- drawing -----------------------------------------------------------

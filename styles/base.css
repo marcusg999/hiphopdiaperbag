@@ -197,6 +197,31 @@ main, .topbar, .foot { position: relative; z-index: 3; }
   mix-blend-mode: difference;
 }
 .topbar .placard { white-space: nowrap; }
+
+/* The bar blends in difference mode and carries no ground of its own, which is
+   the whole reason it reads as part of the page rather than as chrome bolted
+   over it. The cost is that it has nothing to sit on: once the page scrolls,
+   it prints straight through live copy — measured on the audit captures it was
+   overprinting readable text on six of fifteen frames, worst at the top of the
+   hero where it landed inside the lede.
+
+   Giving it a background would fix the collision and kill the effect. Tucking
+   it away keeps both: it is present at the top of the page and whenever the
+   reader moves back up — the two moments a nav is actually wanted — and gets
+   out of the way while they are reading downward. The buy link it carries is
+   never more than one upward scroll from reach, and the hero's own BUY NOW and
+   the closing CTA are both still in the page. */
+.topbar {
+  transition: transform var(--dur-mid, 420ms) var(--ease-out),
+              opacity var(--dur-mid, 420ms) var(--ease-out);
+}
+.topbar.is-tucked {
+  transform: translateY(-115%);
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar { transition: none; }
+}
 /* On a narrow viewport the two ends of the bar collide and the buy link gets
    clipped off the right edge. The city is the expendable half. */
 @media (max-width: 560px) {

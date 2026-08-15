@@ -43,27 +43,52 @@ addEventListener('pointermove', (e) => {
   pointer.has = true;
 }, { passive: true });
 
-/* ---------------------------------------------------------------- field */
-let field = null, motes = null;
-try {
-  field = createField($('#field'), { reducedMotion: reduced });
-  field.start();
-} catch (e) { /* the page must survive a dead shader */ }
+/* ------------------------------------------------- ambience, after the paint
+   The shader field, the mote field and the custom cursor are the page's motion
+   signature, but none of them is content: nobody arrives here to look at a
+   shader. Creating them inline during boot put 3.9s of scripting and one
+   unbroken 1.9s task on the main thread inside exactly the window the browser
+   needed to paint the headline — measured at Lighthouse TBT 2180ms, which is
+   most of a performance score on its own.
 
-try {
-  motes = createParticles($('#motes'), { reducedMotion: reduced });
-  motes.start();
-} catch (e) { /* ditto */ }
+   So they wait. Two rAFs put us past a paint that has actually been committed
+   rather than merely scheduled, and requestIdleCallback then waits for the main
+   thread to be genuinely quiet, with a timeout so a busy thread cannot starve
+   the ambience forever. The visible result on a real device is that the type is
+   readable and the buy link is clickable a beat before the background starts
+   breathing, which is the right order for those two things anyway. */
+let field = null, motes = null, cursor = null;
 
-/* ---------------------------------------------------------------- cursor */
-let cursor = null;
-if (fine && !reduced) {
-  try {
-    cursor = createCursor();
-    cursor.start();
-    document.body.classList.add('has-cursor');
-  } catch (e) { /* no cursor is better than a broken one */ }
+function whenPainted(fn) {
+  const idle = () => (typeof requestIdleCallback === 'function'
+    ? requestIdleCallback(fn, { timeout: 1200 })
+    : setTimeout(fn, 120));
+  requestAnimationFrame(() => requestAnimationFrame(idle));
 }
+
+whenPainted(() => {
+  try {
+    field = createField($('#field'), { reducedMotion: reduced });
+    field.start();
+  } catch (e) { /* the page must survive a dead shader */ }
+
+  try {
+    motes = createParticles($('#motes'), { reducedMotion: reduced });
+    motes.start();
+  } catch (e) { /* ditto */ }
+
+  if (fine && !reduced) {
+    try {
+      cursor = createCursor();
+      cursor.start();
+      document.body.classList.add('has-cursor');
+    } catch (e) { /* no cursor is better than a broken one */ }
+  }
+
+  // the field is pointer- and scroll-driven; hand it the state it missed
+  if (field) field.setPointer(pointer.x, pointer.y);
+  onScroll();
+});
 
 /* ---------------------------------------------------------------- orbit */
 const orbitCanvas = $('#orbit');
@@ -161,6 +186,9 @@ const specItems = $$('[data-spec]');
 const specCount = $('#speccount');
 const heroSection = $('#vitrine');
 
+const topbar = $('.topbar');
+let lastY = 0;
+
 let ticking = false;
 function onScroll() {
   if (ticking) return;
@@ -189,6 +217,18 @@ function onScroll() {
       const hr = heroSection.getBoundingClientRect();
       const past = Math.min(Math.max(-hr.top / innerHeight, 0), 1.6);
       orbit.setScrollAngle(past * -360);
+    }
+
+    // Tuck the top bar while reading downward. It blends in difference mode
+    // with no ground of its own, so anything scrolling under it collides with
+    // it; the cheapest honest fix is to not be there. Held open for the first
+    // half viewport so the page never opens with a missing bar, and the small
+    // deadband stops a trackpad's jitter from flickering it.
+    const y = scrollY;
+    const dy = y - lastY;
+    if (Math.abs(dy) > 4) {
+      topbar.classList.toggle('is-tucked', dy > 0 && y > innerHeight * 0.5);
+      lastY = y;
     }
 
     // the field dims as the page leaves the vitrine
@@ -230,8 +270,15 @@ addEventListener('visibilitychange', () => {
   else { orbit.start(); field && field.start(); motes && motes.start(); }
 });
 
-/* Expose a little state for the audit harness to read. */
-window.__vitrine = { orbit, field, motes, hands, cursor };
+/* Expose a little state for the audit harness to read. Getters rather than a
+   snapshot: the ambient canvases are created after first paint, so a plain
+   object literal built here would hand every reader a permanent null. */
+window.__vitrine = {
+  orbit, hands,
+  get field() { return field; },
+  get motes() { return motes; },
+  get cursor() { return cursor; },
+};
 
 /* ---------------------------------------------------------------- the drop
    Their campaign card, made answerable. "Pass" is not a dead end — it swaps in
