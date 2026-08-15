@@ -2,6 +2,7 @@
  "count": 72,
  "size": 800,
  "pattern": "orbit_%03d.webp",
- "source": "orbit-b.mp4",
- "degreesPerFrame": 5.0
+ "source": "557cb41c-grnscrnshrt3.mov",
+ "degreesPerFrame": 5.0,
+ "matte": "chroma-key"
 }

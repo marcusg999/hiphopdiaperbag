@@ -11,3 +11,4 @@ refs/*.png
 refs/*.json
 assets/src/
 assets/video/
+tools/__pycache__/
